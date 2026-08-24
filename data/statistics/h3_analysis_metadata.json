@@ -1,0 +1,52 @@
+{
+  "ar_orders_compared": [
+    0,
+    1
+  ],
+  "coefficient_signs_invariant_across_ar_orders": false,
+  "error_structure": "unrestricted contemporaneous covariance and common scalar AR order",
+  "formula": "raw_iqr ~ polarization * party + time * party",
+  "generated_utc": "2026-07-21T14:23:58.606691+00:00",
+  "important_limitations": [
+    "association rather than causation",
+    "conditional model intervals do not include temporal model-selection uncertainty",
+    "measurement percentile intervals quantify article-sampling uncertainty",
+    "the sample contains 34 monthly observations"
+  ],
+  "input_sha256": {
+    "D:\\A1 Updated Paper 3\\UKRAID-Politicization\\Factiva_Data\\pipeline_c\\llm_aggregated\\monthly_polarization.csv": "7cabcc2a23b41f2ced25779bcdb0ae6bdb5c32d6b420f438982646365f12309a",
+    "D:\\A1 Updated Paper 3\\UKRAID-Politicization\\Factiva_Data\\pipeline_c\\llm_statistics\\monthly_measurement_bootstrap_replicates.csv": "e704342b67ca63676993eee7b337109310cf7906d161c51d6e1e81e08a486659",
+    "D:\\A1 Updated Paper 3\\UKRAID-Politicization\\Factiva_Data\\pipeline_c\\llm_statistics\\monthly_message_coherence.csv": "7bd52efee6fc06845c19a3fa042c3825770f873fd6c86ed1bb1bc4bb78908192"
+  },
+  "measurement_replicates_requested": 5000,
+  "measurement_replicates_valid": 4989,
+  "measurement_rule": "selected observed-data AR order fixed across 5,000 joint article-cluster replicates",
+  "n_months": 34,
+  "outcomes": [
+    "republican_raw_iqr",
+    "democrat_raw_iqr"
+  ],
+  "output_sha256": {
+    "h3_coefficients.csv": "fc8f1722cf9adff1c7d24710b2763797a1a2f879cc9452920e09da5d9d799674",
+    "h3_influence_diagnostics.csv": "d8bf33a296da10775860f30d4b15ace3c71219b5365e46bf80fc9515a35d1121",
+    "h3_measurement_replicate_coefficients.csv": "58167530515f0fde6c364790d8db4f4e601602bcca36189d9dcc2a3230ec55d3",
+    "h3_model_comparison.csv": "27d4c78719871048e4a0f41befc7c6f4c1831c87b4bf761ed3034fecaa57c27b",
+    "h3_party_contrast.csv": "8b2fb6918e3cec8bffeaf00f8f48c3a65ba956e0e537a2569de2664d6f520ea3",
+    "h3_residual_diagnostics.csv": "c2f20ae3cbbf07a58ce4533e6adc4bc508f405b6527a575cb6eb9462c0864819"
+  },
+  "period": [
+    "2022-03",
+    "2024-12"
+  ],
+  "schema": "paper3-party-aware-h3-v1",
+  "selected_ar_order": 0,
+  "selected_sign_pattern": {
+    "democrat": "negative",
+    "republican": "positive"
+  },
+  "selection_criterion": "observed-data BIC over 34 monthly vector observations",
+  "source_sha256": "0158f55918ddf0c3f4899e2815ad4ef4d3443548df4aea9c32ef787f0aeda9da",
+  "status": "generated_pending_independent_validation",
+  "symmetric_h3_rule": "both party polarization coefficients negative with conditional and measurement intervals below zero",
+  "symmetric_h3_supported": false
+}

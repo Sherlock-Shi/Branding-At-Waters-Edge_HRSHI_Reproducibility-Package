@@ -1,0 +1,225 @@
+\section{Method}
+
+
+\subsection{Data}
+
+We retrieved United States news articles published between March 2022 and December 2024 from Factiva. To identify coverage in which the war was not a passing reference, we required each article to mention Ukraine-related terms at least five times. To identify coverage in which party elite were connected to the Ukraine-related term, we required at least one reference to a U.S. party institution or elite. We excluded press releases, regulatory filings, and congressional, government documents and wire services to focus solely on media representation of party positions rather than direct communication. We removed exact duplicate articles within Factiva and performed further deduplication by matching article titles and body content. The exact query, the filters, and the sample flow appear in Supplementary Methods S1. The initial query return 24,721 articles and 23,630 articles after both deduplication.
+
+The studied period captured key legislative debates between the two parties, including the first complete post-invasion month, the initial bipartisan fund approval, the prolonged negotiations surrounding subsequent aid packages, and the evolving Republican position following the 2022 midterm elections and throughout the 2024 presidential campaign. We adopted month as the observational interval since it preserves sustained development that a coarser interval could collapse and foreclose the questions about trajectory that RQ1 and RQ4 asks, and that it reduces the influence of individual news and day-to-day variation that may not represent durable perception.
+
+\subsection{Constructing party-attributed annotation}
+
+We segmented article content into sentences with spaCy \citep{honnibalSpaCyIndustrialstrengthNatural2020} and retained only sentences containing a match to the prespecified Ukraine, Ukrainian-person, aid, or conflict vocabulary. To attribute positions to parties and party elites, we also required each retained sentence to contain terms for one party and none for the other, so that each sentence can be cleanly attributed to either the Democratic or the Republican Party. While this eligibility limits our capacity to draw insights from instances where both parties are mentioned in relation to Ukraine aid, such as in a comparative sense, we accepted this loss since the alternative is worse for our purpose. Polarization is a signed contrast between two parties, but assigning a mixed-party sentence to one side of that contrast would require an inference that the annotator, which does not see the party labels from the sentences, is in no position to make.
+
+We drew all politician and party terms from the Congress Legislators Database \citep{UnitedstatesCongresslegislators2025} together with a list of prominent political figures relevant to Ukraine policy debates. We masked party and politician references because the annotator would otherwise be able to infer a position from prior association with a party rather than from what the sentence conveys. This risk is not hypothetical. \citet{tornbergLargeLanguageModels2025} shows that an instruction-tuned model identifies the party affiliation of a politician from a single social media message with an accuracy of 0.93 in the United States context, which establishes that party is recoverable from short political text even where it is not stated. The failure mode is specific to our design. Because polarization is the signed difference between two party means, an annotator that assigned scores partly on the basis of inferred party membership would manufacture the very quantity we set out to measure. We therefore removed political titles, replaced all Democrat and Republican terms with the token [ENTITY], and instructed the model not to infer which party [ENTITY] represents. We also removed political titles (e.g., ``Senator'', ``Governor''). Where adjacent ``[ENTITY]''s tokens appear within the same sentence, we merge them into a single token so that a party reference would not read as multiple. In total, we extracted and annotated 37,312 sentences with all eligible articles on average having 3. Tokenization, relevance terms, the attribution rule, and the masking sequence appear in Supplementary Methods S2.16 Ukraine-related Democrat or Republican sentences.
+
+\subsection{Annotation}
+
+\subsubsection{Scoring Framework}
+
+A single support-opposition scale would conflate substantively different judgments about the aid. A politician can favor continuing aid while seeing alternative regions other than Russia as the primary threat, or can accept Ukraine as democratic while not favoring further aid. Collapsing these into one single dimension would record agreement where the underlying reason may diverge. We therefore annotated four dimensions independently. Table 1 presents each dimension with scale anchors.
+
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{threeparttable}
+\caption{Ideological Dimensions and Scale Anchors}
+\label{tab:1}
+\begin{tabularx}{\textwidth}{@{}L{0.95}L{1.15}L{0.95}L{0.95}@{}}
+\toprule
+\textbf{Dimension} & \textbf{Conceptual Purpose} & \textbf{0 End Point} & \textbf{100 End Point} \\
+\midrule
+General Ukraine Aid Stance & Whether military and financial support should continue & Strong support for providing aid & Strong opposition to providing aid \\
+Ukraine Characterization & How the Ukraine is seen & Democratic ally defending Western values & Corrupt, futile, or outside U.S. concern \\
+Threat Priority & Which external threat receives priority & Russia as primary threat to contain & China/Indo-Pacific as primary focus \\
+Resource Allocation & Whether foreign commitments are weighed against domestic priorities & International commitments (NATO, alliances) & Domestic priorities (border, infrastructure, economy) \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Note.} Higher scores across all dimensions indicate positions more aligned with conservative or isolationist foreign policy orientations, while lower scores indicate positions more aligned with liberal internationalist orientations.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+
+The general dimension captures the most direct policy position relevant to legislative votes on Ukraine aid packages. Ukraine Characterization dimension reflects the framing contests over Ukraine's worthiness as an aid recipient in congressional hearings. Threat Priority dimension captures the geopolitical framing that has been central to Republican critiques arguing that Ukraine assistance diverts attention and resources from the China challenge. Resource Allocation reflects the America First versus internationalist tension that crosscuts the Ukraine debate.
+
+\subsubsection{Model and Prompt for Annotation}
+
+We employed OpenAI's GPT-5.1-2025-11-13 for annotation. Table 2 presents the system and user prompt for annotation. First, we asked for a numeric position directly rather than supplying labelled examples. \citet{ornsteinHowTrainYour2025} recommend few-shot prompts and find that additional examples improve performance, but their applications read probability distributions over discrete labels. \citet{tornbergLargeLanguageModels2025} obtains its results zero-shot from instructions written in natural language, and \citet{mensPositioningPoliticalTexts2025} annotated on a continuous scale directly, which is the structure our dimensions require. Supplying examples would also anchor the model on the particular sentences we chose, and that risk is greater when the output is a point on a scale than when it is a category. Second, we set temperature to zero so that the same sentence returns the same score on repeated presentation. Our downstream measures are monthly aggregates whose comparability across months depends on the annotation being stable rather than resampled. Third, we anchored both ends of every scale with substantive descriptions rather than numeric labels alone, so that a score of 30 carries the same meaning in March 2022 as it does in December 2024. Comparability across months is a requirement of RQ1 and RQ4 and cannot be recovered after annotation.
+
+
+\bigskip
+\noindent
+\noindent\begin{minipage}{\textwidth}
+\captionof{table}{Annotation Prompt}
+\label{tab:2}
+\end{minipage}
+\noindent\rule{\textwidth}{0.8pt}
+
+\noindent\textbf{System prompt}\quad You are a precise political text analyst. Return only valid JSON.
+
+\noindent\rule{\textwidth}{0.4pt}
+
+\noindent\textbf{User prompt}
+\begin{lstlisting}
+You will rate a sentence from U.S. news media. The sentence contains [ENTITY], which masks a U.S. political party or politician. If multiple [ENTITY] appear in a sentence, they all refer to members of the same party. Answer FOUR questions about [ENTITY]'s position as expressed in this sentence. Answer based on ONLY what this sentence explicitly conveys. Do NOT infer which party [ENTITY] represents. Answer each question independently. 
+
+Q1: What is [ENTITY]'s stance on providing military and financial aid to Ukraine? 
+(0 = Strong support for providing aid; 100 = Strong opposition to providing aid). 
+Q2: How does [ENTITY] characterize Ukraine? 
+(0 = Democratic ally defending Western values; 100 = Corrupt country / not a U.S. concern / futile cause). 
+Q3: Which strategic threat does [ENTITY] prioritize? 
+(0 = Russia as primary threat to contain; 100 = China/Indo-Pacific as primary strategic focus). 
+Q4: Where does [ENTITY] suggest resources should be allocated? 
+(0 = International commitments; 100 = Domestic priorities). 
+
+Return "NA" when sentence is purely procedural, mentions [ENTITY] without expressing a stance, or concerns Ukraine without U.S. policy relevance. 
+
+Output: JSON only. {q1: <0-100|NA>, q2: <0-100|NA>, q3: <0-100|NA>, q4: <0-100|NA>}
+\end{lstlisting}
+\noindent\rule{\textwidth}{0.8pt}
+
+{\footnotesize \textit{Note.} LLM temperature set to 0. The submitted prompt string appears in Supplementary Methods S3.}
+\bigskip
+
+
+
+
+Because some sentences lack sufficient information for confident assessment on a given dimension, we permitted an explicit NA response rather than forcing an answer. For instance, a sentence discussing military aid may provide clear signal for General Aid Stance while offering no discernible content about Ukraine Characterization. Forcing numeric scores in such cases would introduce measurement noise by compelling the model to extrapolate beyond explicit evidence. The NA option thus functions as an applicability filter rather than an indicator of data quality problems, and we report non-NA rates to characterize each dimension's coverage within the corpus. The submitted prompt string and the response contract appear in Supplementary Methods S3.
+
+\subsubsection{Validation of LLM Annotation}
+
+To validate the reliability of LLM's annotation, we evaluated three distinct properties: Human-to-human agreement, which assess the reproducibility of the annotation prompt by human experts; LLM-to-human agreement, which assess the reliability of LLM annotation against human references; LLM test-retest reliability, which assess reproducibility of the LLM's own annotation over repeated trials of the same text. We declared the agreement thresholds in advance: an average LLM-to-human score correlation of at least 0.70, at least 0.75 of the inter-coder correlation, and average NA agreement of at least 0.80.
+
+Two trained coders independently rated a party-stratified random sample of 50 sentences, 25 Republican-attributed and 25 Democrat-attributed, on all four dimensions. Because the annotation permits NA, the 200 resulting ratings yielded 44 pairs on which both coders returned a numeric score. Across those pairs, agreement was high, with Pearson r = .981, ICC = .981, and a mean absolute error of 4.66 points on the 0 to 100 scale, alongside 99\% agreement on NA assignment across all 200 ratings. Agreement is unevenly distributed across dimensions. General Ukraine Aid Stance supplied 35 of the 44 numeric pairs and reached r = .980. Ukraine Characterization supplied five pairs, while Threat Priority and Resource Allocation supplied two each, which is too few to estimate dimension-specific agreement. The overall figure therefore describes reproducibility of the instructions principally for the general dimension.
+
+The model's scores met all three predeclared thresholds against both coders. Against Coder 1, r = .817 and ICC = .773; against Coder 2, r = .789 and ICC = .734. The average LLM-to-human correlation of .803 is 81.8\% of the inter-coder correlation, and average NA agreement was .83. Two features of this comparison qualify it. First, the model scored systematically lower than the coders, by 11.5 points against Coder 1 and 13.3 points against Coder 2. Polarization is a signed difference between party means, so a bias common to both parties cancels in that difference. Second, NA agreement is the weaker of the two criteria. Human coders disagreed about applicability on 1\% of ratings, whereas the model disagreed with the coders on roughly one rating in six. Because NA determines which sentences enter each dimension, this affects dimensional coverage more than it affects the scores themselves, and we report non-NA rates in the Results for that reason.
+
+We assessed test-retest reliability on a preserved sample of 171 annotation rows scored three times under the same configuration. Repeat scores were nearly identical. General Ukraine Aid Stance reached ICC = .999 on 24 sentences with valid repeats, Ukraine Characterization ICC = .991 on 16, Threat Priority ICC = 1.000 on 7, and Resource Allocation ICC = .995 on 10, for an average ICC of .996 and an average within-sentence standard deviation of 0.44 points. The Threat Priority figure rests on seven sentences that returned identical scores on every repeat, so it should be read as an absence of observed variation rather than as a precise estimate.
+
+Complete validation metrics, per-dimension denominators, resampling intervals, and the score comparison across annotation runs appear in Supplementary Methods S4.
+
+\subsection{Aggregation to monthly-series}
+
+We aggregated sentence-level annotation in two steps. First, for each combination of article, party, and dimension, we averaged the non-NA sentence scores to obtain the article-level annotation, which we denote $x_{ipd}$ for article i, party p, and dimension d. This aggregation yielded 11,819 articles and 14,564 article-party rows. Party counts are nonexclusive because one article can contain separate eligible sentences attributed to both parties. We aggregated to articles first because a sentence is not an independent observation of how a party was represented. Sentences from the same article share an author, a frame, a single editorial decision, so allowing an article to contribute to multiple observation would violate independence.
+
+Second, we aggregated articles into monthly party positions using a relevance-volume weight. We assigned each article the weight:
+
+\[w_{ip}=\log(1+n_{i})\]
+
+Where $n_{i}$ is the number of Ukraine-relevant sentences in the article i, and computed the monthly party position on each dimension as
+
+\[{\bar{x}}_{tpd}=\frac{\sum_{i} w_{i}x_{ipd}}{\sum_{i} w_{i}},\]
+
+We weighted rather than averaging articles equally because an article carrying a single relevant sentence and an article carrying multiple are not equally information about how a party's position was represented that month, and equal weighting would discard that difference. Additionally, we used log rather than raw sentence count because under linear weight, a small number of long articles would dominate the monthly value: an article with forty relevant sentences would outweigh twenty short articles combined.
+
+We then defined monthly polarization on each dimension as the signed difference between party positions:
+
+\[D_{td}={\bar{x}}_{t,\mathrm{Republican},d}-{\bar{x}}_{t,\mathrm{Democrat},d}.\]
+
+Positive values indicate a greater level of polarization, indicated by either greater Republican score or a lower Democrat score on any of the dimensions. The series covers 34 months, giving 272 monthly stance combinations and 136 polarization combinations.
+
+\subsubsection{Within-Party Coherence and Party Brand Index}
+
+We computed a Party Brand Index (PBI) to quantify the degree to which media coverage enables voters to discern partisan differences on General Ukraine Aid Stance. The theoretical motivation draws on the party branding theory \citep{lupuPartyBrandsPartisanship2013,lupuPartyBrandsCrisis2016,pablofernandez-vazquezItMovesEffect2014}, which emphasizes that when parties maintain distinct and internally coherent positions, voters can efficiently use party labels as informational shortcuts. When positions blur or become internally inconsistent, the informational value of party labels diminishes. A measure representative of that argument cannot rest on the size of the polarization alone, it would require a separate measure to represent how coherent and consistent the multiple news sentences are about a party in a given month (i.e., within-party coherence). We measured within-party coherence using the raw interquartile range of article-level General Ukraine Aid Stance scores in that month, with lower values indicating greater message coherence, higher level indicating that most coverage cluster around a common position.
+
+The PBI combines three inputs, each rescaled to the unit interval. We transformed each party's raw IQR into a coherence score, normalized absolute polarization by its observed maximum, and combined the three:
+
+\[C_{tp} = \frac{k}{k + IQR_{tp}}, \quad\quad k=\frac{1}{2}\operatorname{median}\left( IQR_{R} \right) + \frac{1}{2}\operatorname{median}\left( IQR_{D} \right).\]
+
+\[P_{t} = \frac{\left| D_{t,Q1} \right|}{\max_{t}\left| D_{t,Q1} \right|},\]
+
+\[PBI_{t} = 100\left( P_{t} C_{tR} C_{tD} \right)^{1/3}.\]
+
+The coherence transformation converts the IQR, which rises as coverages become less coherent, to a score bounded between 0 and 1 that increases as coverage become more coherent. It returns 0.5 exactly when a party's IQR range equals k. We set k to the average of the two parties' median IQR, which is 28.34 General Ukraine Aid Stance points. So the midpoint of the coherence scale corresponds to the dispersion typical of this corpus. The normalization of polarization rescales it by the maximum polarization across month, 46.48 General Aid Stance point. The widest month take the value of 1. Since both transformation rescale the index to the corpus, the PBI index describes a month relative to other months we observed, not absolute values.
+
+Given that the theoretical claim for polarization and within-party coherence is conjunctive; that a party brand carries further information only when the parties are distinguishable and each party's own coverage is internally consistent, we calculated PBI as the geometric mean of the three components. We took the cube root and multiplied by 100 to return the index to the scale of 0 to 100.
+
+\subsection{Joint Measurement Uncertainty}
+
+Since the same sentence could supply annotation of multiple dimensions, and one article could supply more than one sentence, the annotation drawn from a given article are therefore not independent of one another, and treating annotations from the same article would understate the uncertainty in every downstream quantity built from the single-sentence annotation. We accounted for this dependence with one joint within-month article-cluster bootstrap, which resamples whole articles, so that the replicate distribution reflects variation across the articles that could have entered the corpus rather than across sentences within articles that did. We jointly performed bootstrap given that polarization, within-party coherence and PBI are all aggregated measures of the same annotation. Separate bootstrap would allow an article to enter the replicate for one but not for another measure, producing intervals that are not jointly consistent.
+
+In each of 5000 replicates, we sampled unique articles with replacement within month and carried forward every party and dimension annotation belong to a sampled article. We then repeated the article and monthly aggregation and downstream calculation of polarization, within-party coherence and PBI. For each replicate, this procedure produces a complete set of monthly measures for all four dimensions, and we will refer to this as a measurement panel. We report the 2.5th and 97.5th percentiles of the replicate distribution as the 95\% intervals. These intervals tell us how far our monthly estimates would move under resampling of the articles that entered the corpus. They don't address serial dependence across month, which the temporal models in the following section handle instead. The replicate-count rule, the recalculated calibration, and the months with limited support appear in Supplementary Methods S5.
+
+\subsection{Analysis}
+
+Subsections below are organized by research questions. Each we report the primary estimand and the procedure we used to estimate and answer the research question.
+
+\subsubsection{RQ1: Development of General Ukaine Aid Stance Polarization}
+
+RQ1 asks two questions about the General Ukraine Aid Stance polarization: whether it moved consistently upward over the course of 34 months, and whether that temporal trajectory is gradual or punctuated.
+
+We addressed the first question with a rank-based procedure rather than an ordinary least squares, for two reasons. First, we had no reason to expect the trajectory to be linear. The Mann-Kendall statistic compares every month with every later month and counts how often the later month is higher, so it allows a directional tendency that is accelerating or concentrated in particular periods. Second, with only 34 month as observations, the least square would be vulnerable to months with unusual political behaviors such as U-turns and truce.
+
+The standard Mann-Kendall procedure assumes that observations are independent, but monthly polarization is clearly not. Adjacent months could share running news and legislative calendars, next month's framing could depend on how the same party was covered previously. We also found autocorrelations in our polarization and PBI time-series, which we discuss further in Results. To avoid overstating the significance, we used the Hamed-Rao modification \citep{hamedModifiedMannKendallTrend1998}. It recomputes the variance of the test statistics from detrended ranks. We paired it with Sen slope to report the magnitude of monthly changes in the unit of General Ukraine Aid Stance \citep{senEstimatesRegressionCoefficient1968}. The rank-order interval construction appears in Supplementary Methods S6.
+
+To answer the second question, we fitted three competing descriptions of polarization's temporal trajectory: a single gradual trend with no shifts, a set of constant levels separated by shifts at particular onset dates, and constant levels with a single gradual trend running through them. In each case, we impose also a stationary autoregressive error process of order p that is 0, 1 or 2 \citep{beaulieuDistinguishingTrendsShifts2018}. Fixing the onset dates would not enable us to detect changes we did not anticipate, so we let the data locate the shifts and onset \citep{baiEstimatingTestingLinear1998a}. Additionally, shifts, trend and serial correlation are mutually confoundable, so we estimated the trajectory model and the error structure together \citep{lundGoodPracticesCommon2023}
+
+Because the onset dates are estimated from data, the conventional BIC would receive them as fixed inputs and underestimate the number of parameters fitted. We instead find the more suitable model by minimizing an adjusted BIC:
+
+\[BIC=-2\log L+k\log N,\quad\quad k = 2m+p+2\]
+
+Where N = 34, and k counts the estimated parameter: with m shifts, the model fits m+1 regime levels, p autoregressive coefficients, one innovation variance, and m onset dates. Because the number of shifts changes with the minimum regime duration, and that each number of shifts have its own set of onset dates and autoregressive order, the candidate space is very large. The efficient approach to search through this candidate space to find the best model that describe the trajectory is an island genetic algorithm \citep{liChangepointGAPackageFast2026}. It encodes the number of shifts, onset dates, and the autoregressive order in a single candidate solution and evolves a population of those solutions. Table 3 presents the exact configuration and candidate space.
+
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{threeparttable}
+\caption{Shift Search Configuration}
+\label{tab:3}
+\begin{tabularx}{\textwidth}{@{}L{0.85}L{1.15}@{}}
+\toprule
+\textbf{Component} & \textbf{Setting} \\
+\midrule
+Population size & 100 \\
+Islands & 5 \\
+Maximum migrations & 150 \\
+Generations per migration & 30 \\
+Convergence rule & Stop after 25 migrations without improvement \\
+Autoregressive orders evaluated & 0, 1, 2 \\
+Minimum regime durations & 3 (primary), 4, 5, 6 months \\
+Maximum shifts admitted & 10, 7, 5, 4 at durations of 3, 4, 5, 6 months \\
+Initialization modes & Evenly spaced onset dates or random \\
+Replicates per mode and duration & 5 \\
+Refit agreement tolerance & 1 $\times$ 10$^{-5}$ \\
+\bottomrule
+\end{tabularx}
+\end{threeparttable}
+\end{table}
+
+
+Because the algorithm draws randomly when it initializes and when it generates each new population, a run can halt at a configuration that no local change improves without that configuration being the best available. The internal stopping rule reports that a run stopped improving; it cannot report whether the search settled in the lowest region of the criterion surface. We therefore repeated the search 40 times for each series and recorded how often the independent runs recovered the selected configuration.
+
+A single search starts with a random handful of candidates, fits the maximum-likelihood model, then keep the ones with the lowest BIC. It then generates new candidates by mutating and recombing those candidates, and refit. This repeats until 25 rounds pass without improvement, and each search reports the single best candidates by BIC. We repeat such search for 40 times: 4 minimum duration x 2 initialization modes x 5 replicates of each combination by different random seed. We then took the best candidate across all 40. We compared the three descriptions of the polarization under the same likelihood and same penalty, each re-estimated with the same candidate space. The trend-only description had no search, since it has no onset dates to locate, so we fitted it directly at each of the three autoregressive orders and retained the one with the lowest BIC.
+
+As we previously stated, the article-cluster bootstrap quantifies how much each monthly value (e.g., polarization) could move under resampling of articles. This uncertainty is however, not propagated into the candidate model. We fitted each candidate model to the monthly point estimates, so each value is treated as known exactly, and the search selects the onset dates from those given data. Effectively, the confidence interval we report for each regime level, shift and the total change across period describe how that quantity would vary if the monthly value and the onset date stayed as they are. They cannot describe how each would vary if the resampled articles produced different monthly values, or if the redrawn polarization promotes a different set of onset dates. The second concern is not hypothetical either: with the data held constant and only the random seed varying, individual searches placed the first shift in different months of 2022. We thus report the onset dates with no confidence intervals, and we treat the reported confidence interval for regime as narrower.
+
+\subsubsection{RQ2: Which party moved further and how other dimensions align with aid stance}
+
+RQ2a asks which party moved further toward opposition over the period. We estimated this with the same pairwise logic as Sen slope. For each of the 561 pairs that 34 months allow, we computed the Republican slope between those two months, computed the Democratic slope between the same two months, subtracted the second from the first, and took the median of the 561 difference. The median becomes positive if Republican movement towards opposition exceeds Democratic movement. So the RQ1 and RQ2a report the same estimate under two descriptions, as Sen slope reveals relative party movement. Nevertheless, we distinguish this paired contrast from the difference between the two parties' separately estimated Sen slopes from their individual stance trajectory, and we report both. The algebraic identity between the paired contrast and the polarization slope appears in Supplementary Methods S6.
+
+RQ2b asks how much of the variation in General Ukraine Aid Stance polarization the other three dimensions account for within the same month. Since the three dimensions are correlated with each other, the coefficient of each would depends on which other dimensions are in the same regression, a single regression would thus not be sufficient to answer the question. Dominance analysis resolve this by fitting every possible subset of predictors and averages each predictor's incremental contribution to R2 across all possible subset \citep{budescuDominanceAnalysisNew1993}. Because those contributions are computed from a time series where the months are not exchangeable, an ordinary bootstrap that resamples months independently would violate the dependence and return conclusions that might be too liberal. We instead used stationary bootstrap that resamples blocks of random length of months \citep{politisStationaryBootstrap1994}, and we did so for the complete four-dimensional monthly vector so the contemporaneous relationship between dimensions survive. The block length was set to four month, but we repeated the procedure at three and five months as sensitivity. For each of the 5000 stationary replicates, we drew one measurement panel and recompute the dominance contribution from it, so that the measurement variation and temporal dependence move together. The incremental contributions and the two uncertainty layers appear in Supplementary Methods S7.
+
+with one complete measurement panel.
+
+\subsubsection{RQ3: Polarization and within-party message coherence}
+
+RQ3 asks when polarization is high, is Republican coverage more tightly clustered? And separately, when polarization is high, is Democratic coverage more tightly clustered? And whether the two answers differs.
+
+We modeled the two parties' raw IQR as joint outcomes. For party p in month t,
+
+\[IQR_{tp} = \alpha_{p} + \beta_{p}\widetilde{G}_{t} + \gamma_{p}\widetilde{t} + \varepsilon_{tp}\]
+
+where $\widetilde{G}_{t}$ is signed General Ukraine Aid Stance polarization centred on its sample mean and $\widetilde{t}$ is centred month index. Each party receives its own intercept, polarization coefficient, and time coefficient. Both predictors are centered so that the intercept describe the average month in the sample rather than a month with zero polarization at time zero, which is not useful for interpretation. Because regression for both party share identical set of predictors, fitting the regressions jointly or individually doesn't change the either party's coefficient. But fitting them jointly does provide help answering the question of whether the parties differ. We therefore needed a standard error for $\beta_{R} - \beta_{D}$, which requires knowing if the two coefficients covary.
+
+Additionally, a month with bursts in news about both parties, so the uncertainty in two coefficients could be shared, and fitting them separately would overstate how uncertain the comparison is. To address serial dependence, we allowed each month's unexplained variance to depended on the previous month's. We fitted the model with and without the dependence and chose by BIC. The autoregressive transformation and the decision rule appear in Supplementary Methods S6.
+
+We refitted the model to each of the 5000 draw from the joint article-cluster bootstrap, keeping the error structure at the specification selected on the observed data, so that the refit only differs in measurement, and we report the percentile intervals from those refits alongside the intervals the model produces. As a sensitivity test, we also refitted the model 34 times, omitting one month at each refit, to confirm that no single month drives the result.
+
+\subsubsection{RQ4: How Party Brand Index progress over time}
+
+RQ4 asks how the PBI developed over the period. We applied the same two procedures used for polarization in RQ1: the Hamed-Rao Mann-Kendall test and Sen slope for direction and magnitude, and assessed shift structure with also the same procedure as RQ1. One thing worth noting is we compared only against the model that posed no shifts.
+

@@ -1,0 +1,25 @@
+----------------------------------------
+CODING INSTRUCTIONS
+----------------------------------------
+
+Each coder independently fills in their columns (coder1_q1-q4 or coder2_q1-q4).
+
+Score 0-100 or 'NA' for each dimension:
+
+  Q1 (Aid Stance):
+      0 = Strong support for aid
+      100 = Strong opposition to aid
+
+  Q2 (Ukraine Characterization):
+      0 = Democratic ally defending Western values
+      100 = Corrupt / not US concern / futile cause
+
+  Q3 (Threat Priority):
+      0 = Russia as primary threat
+      100 = China/Indo-Pacific as priority
+
+  Q4 (Resource Allocation):
+      0 = International commitments (NATO, alliances)
+      100 = Domestic priorities (border, economy)
+
+Use 'NA' if the dimension is not expressed in the sentence.

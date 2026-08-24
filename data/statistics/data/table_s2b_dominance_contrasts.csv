@@ -1,0 +1,3 @@
+contrast,observed_difference,bootstrap_mean,bootstrap_standard_error,pointwise_ci_lower,pointwise_ci_upper,simultaneous_ci_lower,simultaneous_ci_upper,probability_positive,simultaneous_family_size,interpretation_role
+q4_minus_q2,0.1085679751596046,0.0372660097667044,0.1660300872357229,-0.2803944520627519,0.3865713802092855,-0.2646312362931396,0.481767186612349,0.581,2,"dependence-aware sensitivity, not confirmatory coverage"
+q4_minus_q3,0.1377347608018898,0.0828947210072301,0.141546251295735,-0.1765801731087928,0.4024301606934247,-0.2354644506508544,0.5109339722546342,0.723,2,"dependence-aware sensitivity, not confirmatory coverage"

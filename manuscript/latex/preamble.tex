@@ -1,0 +1,58 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% ---- Times New Roman throughout: text, math, tables, references, listings ----
+\usepackage{mathptmx}
+\renewcommand{\sfdefault}{ptm}
+\renewcommand{\ttdefault}{ptm}
+
+% ---- page geometry: A4, one-inch margins, symmetric ----
+\usepackage[a4paper,left=1in,right=1in,top=1in,bottom=1in]{geometry}
+
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{threeparttable}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{caption}
+\usepackage{capt-of}
+\usepackage{listings}
+\usepackage{csquotes}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}                  % break long URLs in the reference list
+% ---- bibliography: pick ONE of the three blocks below ----
+% (A) RECOMMENDED. Modern APA via biblatex + biber.
+%     Set the Overleaf bibliography engine to Biber.
+\usepackage[style=apa,backend=biber,natbib=true]{biblatex}
+\addbibresource{bib/references.bib}
+%
+% (B) FALLBACK. Classic BibTeX, approximate APA. No biber needed.
+% \usepackage{natbib}
+%
+% (C) apacite. Known to conflict in this preamble; kept for reference only.
+% \usepackage{natbib}
+% \usepackage{apacite}
+\usepackage{titlesec}
+
+% weighted full-width columns: \begin{tabularx}{\textwidth}{L{1.2}L{0.8}}
+\newcolumntype{L}[1]{>{\hsize=#1\hsize\raggedright\arraybackslash}X}
+\newcolumntype{R}[1]{>{\hsize=#1\hsize\raggedleft\arraybackslash}X}
+
+\titleformat{\section}{\normalfont\fontsize{20}{24}\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\fontsize{16}{19}\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\fontsize{11}{13}\bfseries\itshape}{\thesubsubsection}{1em}{}
+
+\captionsetup{font=rm,labelfont=bf,textfont=it,justification=raggedright,singlelinecheck=false,hypcap=false}
+% ---- blank line between paragraphs, no first-line indent ----
+\usepackage[skip=\baselineskip,indent=0pt]{parskip}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,frame=none,
+        xleftmargin=0pt,framexleftmargin=0pt,columns=fullflexible,
+        keepspaces=true,showstringspaces=false,aboveskip=4pt,belowskip=4pt}
+
+\renewcommand{\bibfont}{\normalfont\normalsize}

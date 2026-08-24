@@ -1,0 +1,5 @@
+minimum_regime_duration,initialization,replicate,seed,suggestion_count,n_breakpoints,ar_order,break_onset_indices_1based,break_onset_dates,joint_bic,log_likelihood,convergence_counter,configuration,runs_reaching_best,total_runs,distinct_configurations
+3,structured,1,361889857,4,3,2,7|14|19,2022-09|2023-04|2023-09,221.89869969104313,-91.55436696013267,0.0,3|2|7|14|19,3,10,6
+4,random,2,334875527,0,3,2,7|14|19,2022-09|2023-04|2023-09,221.89869969104313,-91.55436696013267,0.0,3|2|7|14|19,3,10,6
+5,random,1,1273440723,0,3,2,7|14|19,2022-09|2023-04|2023-09,221.89869969104313,-91.55436696013267,0.0,3|2|7|14|19,4,10,3
+6,random,3,754965843,0,3,2,7|13|19,2022-09|2023-03|2023-09,227.44305041139012,-94.32654232030617,0.0,3|2|7|13|19,5,10,4

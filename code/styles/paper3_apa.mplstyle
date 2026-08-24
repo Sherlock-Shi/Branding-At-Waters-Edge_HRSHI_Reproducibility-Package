@@ -1,0 +1,55 @@
+# Portable Matplotlib companion to LLM_Pipeline/src/plot_style.py.
+# The Python module remains the repository source of truth because it also
+# supplies Seaborn configuration, grayscale semantic roles, dimensions, and helpers.
+font.family: serif
+font.serif: Times New Roman, Liberation Serif, DejaVu Serif, serif
+font.size: 9.5
+figure.dpi: 300
+figure.facecolor: white
+savefig.dpi: 300
+savefig.bbox: tight
+savefig.pad_inches: 0.08
+savefig.facecolor: white
+savefig.transparent: False
+pdf.fonttype: 42
+ps.fonttype: 42
+svg.fonttype: none
+axes.facecolor: white
+axes.edgecolor: 222222
+axes.labelcolor: 222222
+axes.titlecolor: 222222
+axes.linewidth: 0.8
+axes.labelsize: 10
+axes.titlesize: 10.5
+axes.titleweight: normal
+axes.titlepad: 7
+axes.spines.top: False
+axes.spines.right: False
+axes.grid: True
+axes.grid.axis: y
+axes.axisbelow: True
+axes.prop_cycle: cycler('color', ['0.07', '0.30', '0.45', '0.59', '0.70']) + cycler('linestyle', ['-', '-.', '--', ':', '-'])
+xtick.color: 222222
+ytick.color: 222222
+xtick.labelsize: 8.5
+ytick.labelsize: 8.5
+xtick.major.width: 0.8
+ytick.major.width: 0.8
+xtick.major.size: 3
+ytick.major.size: 3
+legend.fontsize: 8.5
+legend.frameon: False
+legend.handlelength: 2.4
+legend.columnspacing: 1.1
+lines.linewidth: 1.1
+lines.markersize: 4
+lines.markeredgewidth: 0.7
+lines.solid_capstyle: round
+lines.dash_capstyle: butt
+errorbar.capsize: 2.5
+patch.edgecolor: 222222
+patch.linewidth: 0.8
+hatch.linewidth: 0.6
+grid.color: E3E3E3
+grid.linewidth: 0.6
+grid.alpha: 0.8

@@ -1,0 +1,99 @@
+{
+  "block_length_basis": "ceiling of n^(1/3), with adjacent lengths 3 and 5 required as sensitivity checks",
+  "bootstrap_replicates": 5000,
+  "generated_utc": "2026-07-21T14:24:33.135587+00:00",
+  "input_sha256": {
+    "D:\\A1 Updated Paper 3\\UKRAID-Politicization\\Factiva_Data\\pipeline_c\\llm_statistics\\dominance_ready.csv": "54ec27a1d1b748501402547df9ea0fd8d04f31b32b90293b18a5d894d2b87462",
+    "D:\\A1 Updated Paper 3\\UKRAID-Politicization\\Factiva_Data\\pipeline_c\\llm_statistics\\monthly_measurement_bootstrap_replicates.csv": "e704342b67ca63676993eee7b337109310cf7906d161c51d6e1e81e08a486659"
+  },
+  "interpretation_boundary": "contemporaneous co-movement, not temporal precedence or causation",
+  "master_seed": 42,
+  "measurement_pairing": "one complete defined joint article-cluster panel sampled for each stationary-bootstrap replicate",
+  "measurement_panel_availability": {
+    "complete_panels": 2704,
+    "minimum_month": "2023-01",
+    "minimum_month_valid_replicates": 3156,
+    "month_valid_replicates": {
+      "2022-03": 5000,
+      "2022-04": 5000,
+      "2022-05": 5000,
+      "2022-06": 4763,
+      "2022-07": 4916,
+      "2022-08": 4907,
+      "2022-09": 5000,
+      "2022-10": 5000,
+      "2022-11": 5000,
+      "2022-12": 5000,
+      "2023-01": 3156,
+      "2023-02": 5000,
+      "2023-03": 5000,
+      "2023-04": 4996,
+      "2023-05": 4999,
+      "2023-06": 5000,
+      "2023-07": 5000,
+      "2023-08": 5000,
+      "2023-09": 5000,
+      "2023-10": 5000,
+      "2023-11": 5000,
+      "2023-12": 5000,
+      "2024-01": 5000,
+      "2024-02": 5000,
+      "2024-03": 5000,
+      "2024-04": 5000,
+      "2024-05": 5000,
+      "2024-06": 5000,
+      "2024-07": 5000,
+      "2024-08": 4684,
+      "2024-09": 5000,
+      "2024-10": 5000,
+      "2024-11": 5000,
+      "2024-12": 5000
+    },
+    "requested_panels": 5000
+  },
+  "n_months": 34,
+  "observed_ranking": [
+    "q4",
+    "q2",
+    "q3"
+  ],
+  "output_sha256": {
+    "dominance_block_sensitivity.csv": "947d2cb7a9020c75eeaa81157bd02209aa430d15f7707f673cd43c4662634df8",
+    "dominance_bootstrap_replicates.csv": "c01814f11e43a4caca4ad429e8b550f0857dc41c12b55f511cb66744c3236cd3",
+    "dominance_contrasts.csv": "6c9d479a9f751cdf5930f7c3673472e172b3dd7389831f12dcd929c209be006c",
+    "dominance_observed.csv": "bfcbc0fa2654bd4d58e07d7f9d960f3a9b3ad5a7130a0343725f01a137907815"
+  },
+  "period": [
+    "2022-03",
+    "2024-12"
+  ],
+  "primary_expected_block_length": 4,
+  "primary_probability_q4_largest": 0.505,
+  "primary_sources": [
+    {
+      "citation": "Budescu, D. V. (1993). Dominance analysis: A new approach to the problem of relative importance of predictors in multiple regression. Psychological Bulletin, 114(3), 542-551.",
+      "doi": "10.1037/0033-2909.114.3.542"
+    },
+    {
+      "citation": "Politis, D. N., and Romano, J. P. (1994). The Stationary Bootstrap. Journal of the American Statistical Association, 89(428), 1303-1313.",
+      "doi": "10.1080/01621459.1994.10476870"
+    }
+  ],
+  "production_child_seeds": {
+    "3": "56857803885069412646751697074397182218",
+    "4": "132305213377408786853874570241620985388",
+    "5": "241740443345836606105318514131144414094"
+  },
+  "reason_not_confirmatory": "the short observed-level series contains structural nonstationarity and some Q3 article-cluster draws are undefined, so nominal coverage is not asserted",
+  "reporting_status": "descriptive ranking with dependence-preserving sensitivity",
+  "resampling_unit": "complete four-dimensional monthly polarization vector",
+  "research_estimand": "contemporaneous observed-level general dominance of Q2, Q3, and Q4 for Q1 polarization",
+  "schema": "paper3-observed-level-dominance-v1",
+  "sensitivity_expected_block_lengths": [
+    3,
+    4,
+    5
+  ],
+  "source_sha256": "cc8dc69c41710b9fd673f2055d92bf2d63348a6a35c22b15fc414a7763be8b18",
+  "status": "generated_pending_independent_validation"
+}

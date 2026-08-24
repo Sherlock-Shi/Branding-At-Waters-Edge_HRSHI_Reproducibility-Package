@@ -1,0 +1,3 @@
+model_role,model_class,minimum_regime_duration,ar_order,break_onset_indices_1based,estimate_end_minus_start,standard_error_conditional,t_statistic_conditional,degrees_freedom,p_two_sided_conditional,ci_lower_conditional,ci_upper_conditional,selection_uncertainty_included
+selected_h1b_class,break_only,3,2,7|14|19,11.706490843807291,0.837628748551286,13.975751028190183,28,3.7731445183543496e-14,9.990686133101825,13.422295554512758,False
+general_break_plus_trend,break_plus_trend,3,2,7|14|19,11.519662385622532,1.2606891879577649,9.137591164943393,27,9.475668161469006e-10,8.932941837974044,14.106382933271025,False

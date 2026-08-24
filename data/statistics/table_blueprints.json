@@ -1,0 +1,1435 @@
+{
+  "schema": "paper3-manuscript-statistical-tables-v1",
+  "style_preset": "compact_reference_guide with named apa_manuscript_table_v1 override",
+  "style_override": {
+    "page": "US Letter landscape, 1 inch margins, 9 inch content width",
+    "font": "Times New Roman",
+    "table_body_size_points": "specified per table",
+    "table_rule": "APA minimal horizontal rules without vertical grid lines",
+    "cell_margins_dxa": {
+      "top": 80,
+      "bottom": 80,
+      "start": 90,
+      "end": 90
+    }
+  },
+  "documents": {
+    "main": {
+      "filename": "paper3_main_statistical_tables.docx",
+      "document_title": "Paper 3 Main Statistical Tables",
+      "tables": [
+        {
+          "label": "Table 1",
+          "title": "Temporal trend tests and the direct paired RQ2 slope contrast",
+          "columns": [
+            "Series or estimand",
+            "n",
+            "Lag",
+            "S",
+            "Var(S), ordinary",
+            "Var(S), H-R",
+            "H-R factor",
+            "Z",
+            "tau",
+            "p",
+            "Sen slope",
+            "95% CI"
+          ],
+          "rows": [
+            [
+              "Q1 polarization",
+              "34",
+              "2",
+              "185",
+              "4550.333333",
+              "4550.333333",
+              "1.000000",
+              "2.727698",
+              "0.329768",
+              "0.006378",
+              "0.289896",
+              "[0.060754, 0.584725]"
+            ],
+            [
+              "Q1 Republican stance",
+              "34",
+              "2",
+              "273",
+              "4550.333333",
+              "4550.333333",
+              "1.000000",
+              "4.032249",
+              "0.486631",
+              "0.000055",
+              "0.423731",
+              "[0.233872, 0.666132]"
+            ],
+            [
+              "Q1 Democratic stance",
+              "34",
+              "2",
+              "165",
+              "4550.333333",
+              "4550.333333",
+              "1.000000",
+              "2.431209",
+              "0.294118",
+              "0.015049",
+              "0.167643",
+              "[0.065280, 0.277788]"
+            ],
+            [
+              "Party Brand Index",
+              "34",
+              "3",
+              "221",
+              "4550.333333",
+              "4550.333333",
+              "1.000000",
+              "3.261378",
+              "0.393939",
+              "0.001109",
+              "0.355445",
+              "[0.149477, 0.540866]"
+            ],
+            [
+              "RQ2 paired Republican minus Democratic slope contrast",
+              "34",
+              "2",
+              "185",
+              "4550.333333",
+              "4550.333333",
+              "1.000000",
+              "2.727698",
+              "0.329768",
+              "0.006378",
+              "0.289896",
+              "[0.060754, 0.584725]"
+            ]
+          ],
+          "width_weights": [
+            24,
+            4,
+            4,
+            5,
+            9,
+            9,
+            7,
+            6,
+            6,
+            7,
+            9,
+            14
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "H-R denotes the Hamed-Rao variance correction. All tests are two-sided, all rows show an increasing direction, and all intervals are 95% rank-order Sen intervals.",
+            "The first four rows use the validated 34-month series from March 2022 through December 2024. Q1 slopes use stance points per month; the Party Brand Index slope uses index points per month.",
+            "The direct paired RQ2 row takes the median Republican-minus-Democratic difference over all 561 common month-pair slopes. It is algebraically identical to the Sen slope of the polarization series. The Republican and Democratic marginal slopes are 0.423731 and 0.167643; their descriptive difference is 0.256088 and is not the inferential contrast."
+          ],
+          "font_size_points": 7.5
+        },
+        {
+          "label": "Table 2",
+          "title": "Selected structural models and required alternatives",
+          "columns": [
+            "Series",
+            "Model",
+            "AR",
+            "Breaks",
+            "Estimated regime onsets",
+            "BIC",
+            "Delta BIC",
+            "Structural means",
+            "Adjacent shifts",
+            "Ljung-Box p, lag 8"
+          ],
+          "rows": [
+            [
+              "Polarization",
+              "Selected three-break AR(2)",
+              "2",
+              "3",
+              "Sep 2022, Apr 2023, Sep 2023",
+              "218.411528",
+              "0.000000",
+              "28.202006 | 37.273519 | 28.742862 | 39.908497",
+              "9.071513 | -8.530658 | 11.165636",
+              "0.157032"
+            ],
+            [
+              "Polarization",
+              "Competitive four-break AR(2)",
+              "2",
+              "4",
+              "Sep 2022, Jan 2023, May 2023, Sep 2023",
+              "219.659920",
+              "1.248391",
+              "28.144890 | 38.567677 | 34.621784 | 28.022644 | 39.936323",
+              "10.422787 | -3.945893 | -6.599140 | 11.913679",
+              "0.096110"
+            ],
+            [
+              "Party Brand Index",
+              "Selected one-break AR(0)",
+              "0",
+              "1",
+              "Sep 2023",
+              "215.482048",
+              "0.000000",
+              "53.719457 | 61.298021",
+              "7.578565",
+              "0.161681"
+            ],
+            [
+              "Party Brand Index",
+              "No-break AR(1) comparator",
+              "1",
+              "0",
+              "None",
+              "224.830744",
+              "9.348696",
+              "57.119335",
+              "None",
+              "0.049944"
+            ]
+          ],
+          "width_weights": [
+            13,
+            18,
+            4,
+            5,
+            17,
+            8,
+            8,
+            16,
+            14,
+            10
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "BIC is the location-adjusted joint criterion. Delta BIC is calculated within each reported two-model pair.",
+            "The selected polarization model contains three AR(2) regime onsets. The competitive four-break AR(2) alternative remains disclosed because Delta BIC equals 1.248392. The selected Party Brand Index model contains one September 2023 onset; its no-break AR(1) comparator has Delta BIC 9.348696.",
+            "Breakpoint dates are estimated new-regime onsets. The table does not provide breakpoint-date or model-selection confidence intervals."
+          ],
+          "font_size_points": 7.7
+        }
+      ]
+    },
+    "supplement": {
+      "filename": "paper3_supplementary_statistical_tables.docx",
+      "document_title": "Paper 3 Supplementary Statistical Tables",
+      "tables": [
+        {
+          "label": "Table S1A",
+          "title": "H3 observed-data error-structure comparison",
+          "columns": [
+            "AR order",
+            "phi",
+            "Log likelihood",
+            "BIC",
+            "Delta BIC",
+            "Selected"
+          ],
+          "rows": [
+            [
+              "0",
+              "0.000000",
+              "-233.421444",
+              "498.580132",
+              "0.000000",
+              "Yes"
+            ],
+            [
+              "1",
+              "-0.228506",
+              "-232.829925",
+              "500.923455",
+              "2.343323",
+              "No"
+            ]
+          ],
+          "width_weights": [
+            10,
+            12,
+            18,
+            16,
+            16,
+            12
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "Observed-data BIC selects independent errors, AR(0)."
+          ],
+          "font_size_points": 8.5
+        },
+        {
+          "label": "Table S1B",
+          "title": "Complete party-aware H3 coefficient contract",
+          "columns": [
+            "AR",
+            "Party",
+            "Term",
+            "Estimate",
+            "Conditional SE",
+            "Conditional p",
+            "Conditional 95% CI",
+            "Measurement mean",
+            "Measurement 95% interval"
+          ],
+          "rows": [
+            [
+              "0",
+              "Republican",
+              "intercept",
+              "39.888933",
+              "1.730233",
+              "4.50e-21",
+              "[36.360100, 43.417765]",
+              "39.412402",
+              "[36.402992, 42.345820]"
+            ],
+            [
+              "0",
+              "Democratic",
+              "intercept",
+              "20.145425",
+              "0.991808",
+              "1.80e-19",
+              "[18.122619, 22.168230]",
+              "19.844517",
+              "[18.433386, 21.318164]"
+            ],
+            [
+              "0",
+              "Republican",
+              "polarization",
+              "0.048660",
+              "0.291262",
+              "0.868403",
+              "[-0.545372, 0.642692]",
+              "-0.229889",
+              "[-1.022015, 0.466064]"
+            ],
+            [
+              "0",
+              "Democratic",
+              "polarization",
+              "-0.103962",
+              "0.166958",
+              "0.538047",
+              "[-0.444474, 0.236551]",
+              "-0.154608",
+              "[-0.459767, 0.100659]"
+            ],
+            [
+              "0",
+              "Republican",
+              "time",
+              "-0.765120",
+              "0.207641",
+              "0.000870",
+              "[-1.188606, -0.341634]",
+              "-0.578469",
+              "[-0.951178, -0.165504]"
+            ],
+            [
+              "0",
+              "Democratic",
+              "time",
+              "0.164779",
+              "0.119024",
+              "0.176118",
+              "[-0.077973, 0.407530]",
+              "0.165811",
+              "[-0.032138, 0.383331]"
+            ],
+            [
+              "1",
+              "Republican",
+              "intercept",
+              "39.876373",
+              "1.407328",
+              "3.28e-23",
+              "[37.002226, 42.750519]",
+              "39.419769",
+              "[36.454708, 42.344958]"
+            ],
+            [
+              "1",
+              "Democratic",
+              "intercept",
+              "20.152430",
+              "0.857184",
+              "7.00e-21",
+              "[18.401826, 21.903034]",
+              "19.838965",
+              "[18.429647, 21.301391]"
+            ],
+            [
+              "1",
+              "Republican",
+              "polarization",
+              "-0.262480",
+              "0.288493",
+              "0.370165",
+              "[-0.851662, 0.326703]",
+              "-0.267450",
+              "[-1.050613, 0.482990]"
+            ],
+            [
+              "1",
+              "Democratic",
+              "polarization",
+              "-0.060953",
+              "0.175717",
+              "0.731101",
+              "[-0.419816, 0.297910]",
+              "-0.144977",
+              "[-0.465476, 0.142275]"
+            ],
+            [
+              "1",
+              "Republican",
+              "time",
+              "-0.636922",
+              "0.180694",
+              "0.001382",
+              "[-1.005949, -0.267895]",
+              "-0.563044",
+              "[-0.956146, -0.186386]"
+            ],
+            [
+              "1",
+              "Democratic",
+              "time",
+              "0.152655",
+              "0.110058",
+              "0.175651",
+              "[-0.072114, 0.377424]",
+              "0.161350",
+              "[-0.043252, 0.383116]"
+            ]
+          ],
+          "width_weights": [
+            5,
+            10,
+            12,
+            10,
+            12,
+            11,
+            16,
+            13,
+            18
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "The selected model uses AR(0). Measurement intervals propagate the joint article-cluster measurement stream. Conditional intervals do not include error-structure selection uncertainty.",
+            "The selected polarization coefficients are 0.048660 for Republicans and -0.103962 for Democrats. H3 is not supported."
+          ],
+          "font_size_points": 7.7
+        },
+        {
+          "label": "Table S1C",
+          "title": "Party contrast in the H3 polarization coefficients",
+          "columns": [
+            "AR",
+            "Contrast",
+            "Estimate",
+            "Conditional p",
+            "Conditional 95% CI",
+            "Measurement mean",
+            "Measurement 95% interval"
+          ],
+          "rows": [
+            [
+              "0",
+              "Republican minus Democratic polarization coefficient",
+              "0.152622",
+              "0.685437",
+              "[-0.608657, 0.913900]",
+              "-0.075281",
+              "[-0.888880, 0.628189]"
+            ],
+            [
+              "1",
+              "Republican minus Democratic polarization coefficient",
+              "-0.201526",
+              "0.616275",
+              "[-1.014260, 0.611207]",
+              "-0.122472",
+              "[-0.939963, 0.645378]"
+            ]
+          ],
+          "width_weights": [
+            6,
+            24,
+            11,
+            12,
+            17,
+            13,
+            18
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "Both conditional and measurement intervals include zero. The selected Republican sign also changes under AR(1)."
+          ],
+          "font_size_points": 8.0
+        },
+        {
+          "label": "Table S2A",
+          "title": "Observed cross-dimensional general dominance",
+          "columns": [
+            "Predictor",
+            "Contribution",
+            "% of model R-squared",
+            "Correlation with Q1",
+            "Full-model R-squared"
+          ],
+          "rows": [
+            [
+              "Q4",
+              "0.180188",
+              "61.234",
+              "0.466308",
+              "0.294261"
+            ],
+            [
+              "Q2",
+              "0.071620",
+              "24.339",
+              "0.319177",
+              "0.294261"
+            ],
+            [
+              "Q3",
+              "0.042453",
+              "14.427",
+              "0.293829",
+              "0.294261"
+            ]
+          ],
+          "width_weights": [
+            12,
+            18,
+            20,
+            20,
+            20
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "Q4 has the largest observed contribution. The ranking describes contemporaneous observed co-movement."
+          ],
+          "font_size_points": 8.5
+        },
+        {
+          "label": "Table S2B",
+          "title": "Dependence-preserving Q4 dominance contrasts",
+          "columns": [
+            "Contrast",
+            "Observed difference",
+            "Simultaneous interval",
+            "Pr(positive)",
+            "Interpretation role"
+          ],
+          "rows": [
+            [
+              "Q4 MINUS Q2",
+              "0.108568",
+              "[-0.264631, 0.481767]",
+              "0.581000",
+              "dependence-aware sensitivity, not confirmatory coverage"
+            ],
+            [
+              "Q4 MINUS Q3",
+              "0.137735",
+              "[-0.235464, 0.510934]",
+              "0.723000",
+              "dependence-aware sensitivity, not confirmatory coverage"
+            ]
+          ],
+          "width_weights": [
+            16,
+            16,
+            20,
+            14,
+            34
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "Both simultaneous intervals include zero. Do not infer confirmatory pairwise superiority, temporal precedence, or causation."
+          ],
+          "font_size_points": 8.2
+        },
+        {
+          "label": "Table S2C",
+          "title": "Stationary month-block sensitivity for Q4 contributions and contrasts",
+          "columns": [
+            "Block length",
+            "Uncertainty layer",
+            "Statistic",
+            "Observed",
+            "Bootstrap mean",
+            "Bootstrap SE",
+            "Pointwise 95% interval",
+            "Pr(positive)"
+          ],
+          "rows": [
+            [
+              "3",
+              "Measurement And Temporal",
+              "Q4 CONTRIBUTION",
+              "0.180188",
+              "0.157459",
+              "0.124682",
+              "[0.003345, 0.453110]",
+              "1.000000"
+            ],
+            [
+              "3",
+              "Measurement And Temporal",
+              "Q4 MINUS Q2",
+              "0.108568",
+              "0.041071",
+              "0.171773",
+              "[-0.294400, 0.398629]",
+              "0.587600"
+            ],
+            [
+              "3",
+              "Measurement And Temporal",
+              "Q4 MINUS Q3",
+              "0.137735",
+              "0.085816",
+              "0.143560",
+              "[-0.180135, 0.401366]",
+              "0.732800"
+            ],
+            [
+              "3",
+              "Temporal Only",
+              "Q4 CONTRIBUTION",
+              "0.180188",
+              "0.188501",
+              "0.118495",
+              "[0.005230, 0.457619]",
+              "1.000000"
+            ],
+            [
+              "3",
+              "Temporal Only",
+              "Q4 MINUS Q2",
+              "0.108568",
+              "0.098806",
+              "0.155391",
+              "[-0.201878, 0.413597]",
+              "0.739000"
+            ],
+            [
+              "3",
+              "Temporal Only",
+              "Q4 MINUS Q3",
+              "0.137735",
+              "0.114965",
+              "0.129235",
+              "[-0.109408, 0.402289]",
+              "0.826000"
+            ],
+            [
+              "4",
+              "Measurement And Temporal",
+              "Q4 CONTRIBUTION",
+              "0.180188",
+              "0.154246",
+              "0.123439",
+              "[0.002629, 0.450153]",
+              "1.000000"
+            ],
+            [
+              "4",
+              "Measurement And Temporal",
+              "Q4 MINUS Q2",
+              "0.108568",
+              "0.037266",
+              "0.166030",
+              "[-0.280394, 0.386571]",
+              "0.581000"
+            ],
+            [
+              "4",
+              "Measurement And Temporal",
+              "Q4 MINUS Q3",
+              "0.137735",
+              "0.082895",
+              "0.141546",
+              "[-0.176580, 0.402430]",
+              "0.723000"
+            ],
+            [
+              "4",
+              "Temporal Only",
+              "Q4 CONTRIBUTION",
+              "0.180188",
+              "0.185115",
+              "0.118611",
+              "[0.004471, 0.453833]",
+              "1.000000"
+            ],
+            [
+              "4",
+              "Temporal Only",
+              "Q4 MINUS Q2",
+              "0.108568",
+              "0.094545",
+              "0.152640",
+              "[-0.199361, 0.408924]",
+              "0.733800"
+            ],
+            [
+              "4",
+              "Temporal Only",
+              "Q4 MINUS Q3",
+              "0.137735",
+              "0.109120",
+              "0.130636",
+              "[-0.113481, 0.406403]",
+              "0.804200"
+            ],
+            [
+              "5",
+              "Measurement And Temporal",
+              "Q4 CONTRIBUTION",
+              "0.180188",
+              "0.154515",
+              "0.121751",
+              "[0.002724, 0.442705]",
+              "1.000000"
+            ],
+            [
+              "5",
+              "Measurement And Temporal",
+              "Q4 MINUS Q2",
+              "0.108568",
+              "0.040752",
+              "0.163061",
+              "[-0.279479, 0.381820]",
+              "0.587200"
+            ],
+            [
+              "5",
+              "Measurement And Temporal",
+              "Q4 MINUS Q3",
+              "0.137735",
+              "0.083655",
+              "0.141092",
+              "[-0.181202, 0.388013]",
+              "0.725400"
+            ],
+            [
+              "5",
+              "Temporal Only",
+              "Q4 CONTRIBUTION",
+              "0.180188",
+              "0.185282",
+              "0.115806",
+              "[0.004231, 0.443900]",
+              "1.000000"
+            ],
+            [
+              "5",
+              "Temporal Only",
+              "Q4 MINUS Q2",
+              "0.108568",
+              "0.097169",
+              "0.150376",
+              "[-0.199869, 0.395274]",
+              "0.747200"
+            ],
+            [
+              "5",
+              "Temporal Only",
+              "Q4 MINUS Q3",
+              "0.137735",
+              "0.109632",
+              "0.129315",
+              "[-0.111595, 0.403983]",
+              "0.799400"
+            ]
+          ],
+          "width_weights": [
+            9,
+            18,
+            16,
+            10,
+            13,
+            12,
+            17,
+            11
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "Each fixed cell contains 5,000 stationary-bootstrap replicates. The complete machine-readable table also retains full-model R-squared, individual contributions, and correlations.",
+            "These intervals provide dependence-preserving sensitivity only. The analysis does not claim nominal confirmatory coverage, pairwise superiority, temporal precedence, or causation."
+          ],
+          "font_size_points": 7.6
+        },
+        {
+          "label": "Table S3A",
+          "title": "Trend-only, break-only, and break-plus-trend comparison",
+          "columns": [
+            "Minimum duration",
+            "Model class",
+            "AR",
+            "Breaks",
+            "Estimated onsets",
+            "BIC",
+            "Delta BIC",
+            "Selected"
+          ],
+          "rows": [
+            [
+              "3",
+              "Trend Only",
+              "0",
+              "0",
+              "None",
+              "228.228583",
+              "9.817055",
+              "No"
+            ],
+            [
+              "3",
+              "Break Only",
+              "2",
+              "3",
+              "Sep 2022, Apr 2023, Sep 2023",
+              "218.411528",
+              "0.000000",
+              "Yes"
+            ],
+            [
+              "3",
+              "Break Plus Trend",
+              "2",
+              "3",
+              "Sep 2022, Apr 2023, Sep 2023",
+              "221.898700",
+              "3.487172",
+              "No"
+            ],
+            [
+              "4",
+              "Trend Only",
+              "0",
+              "0",
+              "None",
+              "228.228583",
+              "9.817055",
+              "No"
+            ],
+            [
+              "4",
+              "Break Only",
+              "2",
+              "3",
+              "Sep 2022, Apr 2023, Sep 2023",
+              "218.411528",
+              "0.000000",
+              "Yes"
+            ],
+            [
+              "4",
+              "Break Plus Trend",
+              "2",
+              "3",
+              "Sep 2022, Apr 2023, Sep 2023",
+              "221.898700",
+              "3.487172",
+              "No"
+            ],
+            [
+              "5",
+              "Trend Only",
+              "0",
+              "0",
+              "None",
+              "228.228583",
+              "9.817055",
+              "No"
+            ],
+            [
+              "5",
+              "Break Only",
+              "2",
+              "3",
+              "Sep 2022, Apr 2023, Sep 2023",
+              "218.411528",
+              "0.000000",
+              "Yes"
+            ],
+            [
+              "5",
+              "Break Plus Trend",
+              "2",
+              "3",
+              "Sep 2022, Apr 2023, Sep 2023",
+              "221.898700",
+              "3.487172",
+              "No"
+            ],
+            [
+              "6",
+              "Trend Only",
+              "0",
+              "0",
+              "None",
+              "228.228583",
+              "4.241523",
+              "No"
+            ],
+            [
+              "6",
+              "Break Only",
+              "2",
+              "3",
+              "Sep 2022, Mar 2023, Sep 2023",
+              "223.987060",
+              "0.000000",
+              "Yes"
+            ],
+            [
+              "6",
+              "Break Plus Trend",
+              "2",
+              "3",
+              "Sep 2022, Mar 2023, Sep 2023",
+              "227.443050",
+              "3.455991",
+              "No"
+            ]
+          ],
+          "width_weights": [
+            10,
+            17,
+            5,
+            7,
+            23,
+            12,
+            12,
+            9
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "Break-only has the lowest location-adjusted BIC under every examined minimum-duration definition."
+          ],
+          "font_size_points": 8.0
+        },
+        {
+          "label": "Table S3B",
+          "title": "Primary common within-regime slope",
+          "columns": [
+            "Model",
+            "Estimate",
+            "Conditional SE",
+            "Conditional p",
+            "Conditional 95% CI"
+          ],
+          "rows": [
+            [
+              "Break plus trend",
+              "-0.018687",
+              "0.094444",
+              "0.844635",
+              "[-0.212469, 0.175096]"
+            ]
+          ],
+          "width_weights": [
+            24,
+            15,
+            18,
+            16,
+            24
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "The interval includes zero. This establishes an absence of evidence for a common gradual within-regime slope, not proof that gradual change was absent."
+          ],
+          "font_size_points": 8.5
+        },
+        {
+          "label": "Table S3C",
+          "title": "Fitted end-to-start polarization contrasts",
+          "columns": [
+            "Model class",
+            "Estimate",
+            "Conditional SE",
+            "Conditional p",
+            "Conditional 95% CI",
+            "Selection uncertainty included"
+          ],
+          "rows": [
+            [
+              "Break Only",
+              "11.706491",
+              "0.837629",
+              "3.77e-14",
+              "[9.990686, 13.422296]",
+              "No"
+            ],
+            [
+              "Break Plus Trend",
+              "11.519662",
+              "1.260689",
+              "9.48e-10",
+              "[8.932942, 14.106383]",
+              "No"
+            ]
+          ],
+          "width_weights": [
+            20,
+            13,
+            15,
+            14,
+            20,
+            18
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "Intervals condition on the fitted structural model and do not provide post-selection coverage."
+          ],
+          "font_size_points": 8.4
+        },
+        {
+          "label": "Table S3D",
+          "title": "Exact Mann-Kendall S decomposition",
+          "columns": [
+            "Pair category",
+            "Positive",
+            "Negative",
+            "Ties",
+            "Pairs",
+            "S contribution"
+          ],
+          "rows": [
+            [
+              "Within Regime",
+              "74",
+              "92",
+              "0",
+              "166",
+              "-18"
+            ],
+            [
+              "Between Regime",
+              "299",
+              "96",
+              "0",
+              "395",
+              "203"
+            ],
+            [
+              "Total",
+              "373",
+              "188",
+              "0",
+              "561",
+              "185"
+            ]
+          ],
+          "width_weights": [
+            24,
+            13,
+            13,
+            10,
+            13,
+            17
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "The decomposition is descriptive arithmetic on the original series and is not a second significance test."
+          ],
+          "font_size_points": 8.5
+        },
+        {
+          "label": "Table S4A",
+          "title": "Joint common-AR breakpoint duration sensitivity and optimizer recovery",
+          "columns": [
+            "Series",
+            "Minimum duration",
+            "Breaks",
+            "AR",
+            "Estimated onsets",
+            "BIC",
+            "Best runs",
+            "Recovery rate"
+          ],
+          "rows": [
+            [
+              "Polarization",
+              "3",
+              "3",
+              "2",
+              "Sep 2022, Apr 2023, Sep 2023",
+              "218.411528",
+              "3/10",
+              "0.300"
+            ],
+            [
+              "Polarization",
+              "4",
+              "3",
+              "2",
+              "Sep 2022, Apr 2023, Sep 2023",
+              "218.411528",
+              "6/10",
+              "0.600"
+            ],
+            [
+              "Polarization",
+              "5",
+              "3",
+              "2",
+              "Sep 2022, Apr 2023, Sep 2023",
+              "218.411528",
+              "7/10",
+              "0.700"
+            ],
+            [
+              "Polarization",
+              "6",
+              "3",
+              "2",
+              "Sep 2022, Mar 2023, Sep 2023",
+              "223.987060",
+              "4/10",
+              "0.400"
+            ],
+            [
+              "Party Brand Index",
+              "3",
+              "1",
+              "0",
+              "Sep 2023",
+              "215.482048",
+              "10/10",
+              "1.000"
+            ],
+            [
+              "Party Brand Index",
+              "4",
+              "1",
+              "0",
+              "Sep 2023",
+              "215.482048",
+              "10/10",
+              "1.000"
+            ],
+            [
+              "Party Brand Index",
+              "5",
+              "1",
+              "0",
+              "Sep 2023",
+              "215.482048",
+              "10/10",
+              "1.000"
+            ],
+            [
+              "Party Brand Index",
+              "6",
+              "1",
+              "0",
+              "Sep 2023",
+              "215.482048",
+              "10/10",
+              "1.000"
+            ]
+          ],
+          "width_weights": [
+            15,
+            11,
+            7,
+            5,
+            26,
+            12,
+            10,
+            12
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "Optimizer starts assess numerical convergence. They are not bootstrap replicates and do not quantify breakpoint-date uncertainty."
+          ],
+          "font_size_points": 7.9
+        },
+        {
+          "label": "Table S4B",
+          "title": "Reported breakpoint regimes, structural means, and adjacent shifts",
+          "columns": [
+            "Series",
+            "Role",
+            "Regime",
+            "Start",
+            "End",
+            "Months",
+            "Structural mean",
+            "Adjacent shift"
+          ],
+          "rows": [
+            [
+              "Polarization",
+              "Selected Primary",
+              "1",
+              "2022-03",
+              "2022-08",
+              "6",
+              "28.202006",
+              ""
+            ],
+            [
+              "Polarization",
+              "Selected Primary",
+              "2",
+              "2022-09",
+              "2023-03",
+              "7",
+              "37.273519",
+              "9.071513"
+            ],
+            [
+              "Polarization",
+              "Selected Primary",
+              "3",
+              "2023-04",
+              "2023-08",
+              "5",
+              "28.742862",
+              "-8.530658"
+            ],
+            [
+              "Polarization",
+              "Selected Primary",
+              "4",
+              "2023-09",
+              "2024-12",
+              "16",
+              "39.908497",
+              "11.165636"
+            ],
+            [
+              "Polarization",
+              "Required Alternative",
+              "1",
+              "2022-03",
+              "2022-08",
+              "6",
+              "28.144890",
+              ""
+            ],
+            [
+              "Polarization",
+              "Required Alternative",
+              "2",
+              "2022-09",
+              "2022-12",
+              "4",
+              "38.567677",
+              "10.422787"
+            ],
+            [
+              "Polarization",
+              "Required Alternative",
+              "3",
+              "2023-01",
+              "2023-04",
+              "4",
+              "34.621784",
+              "-3.945893"
+            ],
+            [
+              "Polarization",
+              "Required Alternative",
+              "4",
+              "2023-05",
+              "2023-08",
+              "4",
+              "28.022644",
+              "-6.599140"
+            ],
+            [
+              "Polarization",
+              "Required Alternative",
+              "5",
+              "2023-09",
+              "2024-12",
+              "16",
+              "39.936323",
+              "11.913679"
+            ],
+            [
+              "Party Brand Index",
+              "Selected Primary",
+              "1",
+              "2022-03",
+              "2023-08",
+              "18",
+              "53.719457",
+              ""
+            ],
+            [
+              "Party Brand Index",
+              "Selected Primary",
+              "2",
+              "2023-09",
+              "2024-12",
+              "16",
+              "61.298021",
+              "7.578565"
+            ],
+            [
+              "Party Brand Index",
+              "Required Alternative",
+              "1",
+              "2022-03",
+              "2024-12",
+              "34",
+              "57.119335",
+              ""
+            ]
+          ],
+          "width_weights": [
+            15,
+            17,
+            8,
+            11,
+            11,
+            8,
+            15,
+            15
+          ],
+          "alignments": [
+            "left",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "notes": [
+            "Adjacent shifts compare each regime with the immediately preceding structural mean."
+          ],
+          "font_size_points": 7.9
+        }
+      ]
+    }
+  }
+}

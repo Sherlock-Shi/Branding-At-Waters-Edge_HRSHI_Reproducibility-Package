@@ -1,0 +1,26 @@
+{
+  "child_namespace": "joint_article_cluster_measurement",
+  "child_seed": "30805443184975937210104525605522892420",
+  "ci_percentiles": [
+    2.5,
+    97.5
+  ],
+  "cluster_carry_rule": "all associated party and dimension rows",
+  "contract_role": "active production measurement uncertainty",
+  "input_file": "D:\\A1 Updated Paper 3\\UKRAID-Politicization\\Factiva_Data\\pipeline_c\\llm_aggregated\\article_level_scores.csv",
+  "input_sha256": "e94fa61c191522afdda264164b42f91cba22ac059f3e45b691a73bf865539072",
+  "master_seed": 42,
+  "minimum_valid_fraction": 0.95,
+  "n_bootstrap": 5000,
+  "point_estimate_change": false,
+  "quantile_method": "numpy.percentile default linear interpolation",
+  "raw_iqr_minimum_articles": 4,
+  "resampling_unit": "stable_article_id within year_month",
+  "schema": "paper3-joint-article-cluster-bootstrap-v1",
+  "seed_schema": "paper3-seed-v1",
+  "software": {
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "python": "3.11.9"
+  }
+}

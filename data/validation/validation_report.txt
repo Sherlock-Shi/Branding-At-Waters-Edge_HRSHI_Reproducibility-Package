@@ -1,0 +1,144 @@
+======================================================================
+LLM VALIDATOR REPORT
+======================================================================
+
+Timestamp: 2025-11-27 21:41:10
+Model: gpt-5.1-2025-11-13
+Sample: 680
+Overall: PASS
+
+============================================================
+TEST 1: JSON COMPLIANCE & NA RATES
+============================================================
+
+Parsing Results:
+  Total sentences: 680
+  Successful parses: 680 (100.0%)
+  JSON errors: 0
+  Range errors: 0
+  API errors: 0
+
+NA Rates by Dimension:
+  q1: 233/680 = 34.3% NA
+  q2: 513/680 = 75.4% NA
+  q3: 622/680 = 91.5% NA
+  q4: 551/680 = 81.0% NA
+
+✅ PASS: JSON compliance rate >= 95%
+
+Note: High NA rates on some dimensions are expected - not all sentences
+      express all 4 discursive formations (Rieger, 2025).
+  [Checkpoint saved: test_1]
+
+============================================================
+TEST 2: TEST-RETEST RELIABILITY
+============================================================
+  Using main scoring pass as repeat 1...
+  Scoring 50 sentences 2 more times...
+
+  Repeat 2/3...
+
+  Repeat 3/3...
+
+📊 Reliability Metrics by Dimension:
+   Dim  n     ICC      Interp       Pearson r  Avg Std 
+   ---- ----- -------- ------------ ---------- --------
+   q1   24    0.999    excellent    0.999      0.10    
+   q2   16    0.991    excellent    0.999      0.74    
+   q3   7     1.000    excellent    1.000      0.00    
+   q4   10    0.995    excellent    0.996      0.94    
+
+  Overall: ICC=0.996, Pearson r=0.999, Std=0.44
+
+✅ PASS: ICC >= 0.75 (good to excellent reliability)
+  [Checkpoint saved: test_2]
+
+============================================================
+TEST 3: PARTY BALANCE
+============================================================
+
+Total: 680 (Rep: 340, Dem: 340)
+
+Dim  Rep n   Rep Mean   Dem n   Dem Mean   Diff     p-value    Status
+---------------------------------------------------------------------------
+q1   226     50.7       221     17.9       +32.8    0.0000     ✅
+q2   73      31.5       94      10.0       +21.5    0.0004     ✅
+q3   20      50.5       38      9.2        +41.3    0.0001     ✅
+q4   72      51.7       57      15.7       +36.0    0.0000     ✅
+
+  Overall: 4/4 dimensions (Rep > Dem, p < 0.05)
+  Status: PASS
+  [Checkpoint saved: test_3]
+
+============================================================
+TEST 4: SCALE USAGE
+============================================================
+
+  q1: min=0, max=100, mean=34.5, std=33.1
+       ✅ Good scale usage
+
+  q2: min=0, max=100, mean=19.4, std=27.3
+       ✅ Good scale usage
+
+  q3: min=0, max=100, mean=23.4, std=34.9
+       ✅ Good scale usage
+
+  q4: min=0, max=100, mean=35.8, std=33.9
+       ✅ Good scale usage
+
+  Overall status: PASS
+  [Checkpoint saved: test_4]
+
+============================================================
+TEST 5: ENTITY MASKING SENSITIVITY
+============================================================
+
+Purpose: Verify party identity does NOT influence scores.
+
+Sentence                                           Dim   Rep    Dem    Diff   Status
+--------------------------------------------------------------------------------
+{entity} voted to increase military aid to Ukra... q1    0      0      0      ✅
+{entity} criticized the $61 billion aid package... q1    75     75     0      ✅
+{entity} called for focusing on the southern bo... q4    100    100    0      ✅
+{entity} praised Ukraine as a democracy fightin... q2    0      0      0      ✅
+{entity} warned that China poses the greatest t... q3    100    100    0      ✅
+
+Avg diff: 0.0, Max diff: 0
+
+✅ PASS
+  [Checkpoint saved: test_5]
+
+============================================================
+TEST 6: DIMENSION CORRELATIONS (Descriptive)
+============================================================
+
+Note: Descriptive only. Moderate correlations expected (Rieger, 2025).
+
+Pair       n      r        p-value    Interpretation
+--------------------------------------------------
+q1-q2     119    0.840    0.0000     strong
+q1-q3     39     0.693    0.0000     moderate
+q1-q4     116    0.705    0.0000     strong
+q2-q3     35     0.704    0.0000     strong
+q2-q4     45     0.885    0.0000     strong
+q3-q4     26     0.664    0.0002     moderate
+
+  Average r: 0.748, Average |r|: 0.748
+  [Checkpoint saved: test_6]
+
+[Saved] validation_results.pkl, scored_sample.csv, report.txt
+
+======================================================================
+SUMMARY
+======================================================================
+
+  Test 1 (JSON): PASS
+  Test 2 (Retest): PASS
+  Test 3 (Party): PASS
+  Test 4 (Scale): PASS
+  Test 5 (Masking): PASS
+  Test 6 (Correlations): DESCRIPTIVE
+
+  OVERALL: PASS
+
+  Note: Manual ground-truth test via --test6-manual

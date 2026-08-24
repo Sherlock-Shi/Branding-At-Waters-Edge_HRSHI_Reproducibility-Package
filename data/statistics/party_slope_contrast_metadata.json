@@ -1,0 +1,30 @@
+{
+  "schema": "paper3-paired-party-sen-contrast-metadata-v1",
+  "generated_utc": "2026-07-21T15:32:29.248938+00:00",
+  "run_id": "party-slope-contrast-4a3d046cc5a45d25",
+  "status": "generated_pending_independent_validation",
+  "method": "For every common month pair, subtract the Democratic slope from the Republican slope and take the median. The pairwise differences equal the slopes of the Republican minus Democratic gap exactly.",
+  "sources": [
+    {
+      "citation": "Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall's Tau. Journal of the American Statistical Association, 63(324), 1379-1389.",
+      "doi": "10.1080/01621459.1968.10480934",
+      "role": "paired median slope estimator and rank-order interval"
+    },
+    {
+      "citation": "Hamed, K. H., and Rao, A. R. (1998). A modified Mann-Kendall trend test for autocorrelated data. Journal of Hydrology, 204(1-4), 182-196.",
+      "doi": "10.1016/S0022-1694(97)00125-X",
+      "role": "variance correction for serial dependence"
+    }
+  ],
+  "input_sha256": {
+    "D:\\A1 Updated Paper 3\\UKRAID-Politicization\\Factiva_Data\\pipeline_c\\llm_aggregated\\monthly_stance.csv": "54b27ab61178daff018c83a215be5b7295b738f8edd0912ba1e53aca82c40ea4",
+    "D:\\A1 Updated Paper 3\\UKRAID-Politicization\\Factiva_Data\\pipeline_c\\llm_aggregated\\monthly_polarization.csv": "7cabcc2a23b41f2ced25779bcdb0ae6bdb5c32d6b420f438982646365f12309a",
+    "D:\\A1 Updated Paper 3\\UKRAID-Politicization\\Factiva_Data\\pipeline_c\\llm_statistics\\trend_tests.csv": "c897904724a74dfd90d720bde2c338924369fb87e96973fbc94e5ef7bc217c4d"
+  },
+  "output_sha256": {
+    "party_slope_contrast.csv": "9ec7eb35bd0cbe6ef9b225f7179c7431cbe1905ca9b4320c5d393c1ee7e2d6af"
+  },
+  "code_sha256": {
+    "LLM_Pipeline\\src\\party_slope_contrast.py": "c35e878d9cb28c61961daee0510a7d2bd8081c45ccc2f85ebfcfb47828954e95"
+  }
+}

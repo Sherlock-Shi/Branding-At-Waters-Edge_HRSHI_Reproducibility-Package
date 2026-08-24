@@ -1,0 +1,4 @@
+pair_category,positive,negative,ties,pairs,mann_kendall_s_contribution
+within_regime,74,92,0,166,-18
+between_regime,299,96,0,395,203
+total,373,188,0,561,185

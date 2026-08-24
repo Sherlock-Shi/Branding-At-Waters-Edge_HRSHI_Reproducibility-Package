@@ -1,0 +1,45 @@
+{
+  "break_plus_trend_common_slope": -0.018686895031448936,
+  "break_plus_trend_common_slope_ci": [
+    -0.21246937456896212,
+    0.17509558450606424
+  ],
+  "criterion": "common maximum-likelihood AR model with location-adjusted BIC",
+  "endpoint_intervals_are_conditional_on_selected_structure": true,
+  "generated_utc": "2026-07-21T14:32:31.161721+00:00",
+  "input_sha256": {
+    "D:\\A1 Updated Paper 3\\UKRAID-Politicization\\Factiva_Data\\pipeline_c\\llm_aggregated\\monthly_polarization.csv": "7cabcc2a23b41f2ced25779bcdb0ae6bdb5c32d6b420f438982646365f12309a",
+    "D:\\A1 Updated Paper 3\\UKRAID-Politicization\\Factiva_Data\\pipeline_c\\llm_statistics\\joint_ar_breakpoints\\joint_ar_bic_winners.csv": "b2b691b138fe4a10f31e5c08c6056b2220b996928a35fa39c9d985ad8a310ad2"
+  },
+  "mann_kendall_decomposition_is_descriptive": true,
+  "master_seed": 42,
+  "minimum_regime_durations": [
+    3,
+    4,
+    5,
+    6
+  ],
+  "model_classes": [
+    "trend_only",
+    "break_only",
+    "break_plus_trend"
+  ],
+  "output_sha256": {
+    "fitted_endpoint_contrast.csv": "1ada665e3f89fe1260c2e0b43e988c9cf008abf729e6c391284fceb6e3f67cfb",
+    "mann_kendall_s_decomposition.csv": "e6b3ecbc69343203e94e7908836b1fdc917531da22c86cbc5560c07f99dadc58",
+    "trend_break_coefficients.csv": "932994cdd4029cfd42e251d8efade6498eb8e5415fcc3b0585891ffd451261ec",
+    "trend_break_fitted_series.csv": "31a253bebd401ec7a04947d2844ae7d245d3aec69e56ac2936accded2c634827",
+    "trend_break_model_comparison.csv": "15098a027541e9b5a3a1b36fdcc3a1313b535fd7826f00c151f93c65ab58e6c1",
+    "trend_break_residual_diagnostics.csv": "0cd420007a2b458224e2355fbb7f0a5bedd246c1bec7722f318b4585b269568a",
+    "trend_break_search_runs.csv": "03baf65f37aa1c7cfc14a0e89b374b40a6ef1b2a4d090274d7589df8d1a58031",
+    "trend_break_search_winners.csv": "8cbc37f62df5b5cf84b2d7e77e3be0b93bf7600e23bea2d6c79839db98f386f2"
+  },
+  "primary_minimum_regime_duration": 3,
+  "schema": "paper3-trend-break-comparison-v1",
+  "search_runs_per_mode_and_duration": 5,
+  "selected_ar_order": 2,
+  "selected_break_onset_dates": "2022-09|2023-04|2023-09",
+  "selected_model_class": "break_only",
+  "source_sha256": "36f5572ed8992f79353cd66d7ac0d9c16dcc8d08aeac31c792fc224d588c3a60",
+  "status": "generated_pending_independent_validation"
+}

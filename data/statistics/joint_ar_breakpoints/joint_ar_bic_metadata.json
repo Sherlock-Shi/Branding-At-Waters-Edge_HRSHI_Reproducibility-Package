@@ -1,0 +1,121 @@
+{
+  "analysis_status": "integrated output requires independent validator",
+  "analysis_date": "2026-07-21T15:23:37.242805+01:00",
+  "execution_context": "centralized Pipeline C statistics stage",
+  "model": "piecewise constant structural mean with one common stationary AR(p) error process",
+  "ar_order_search": [
+    0,
+    1,
+    2
+  ],
+  "minimum_regime_durations": [
+    3,
+    4,
+    5,
+    6
+  ],
+  "criterion": "BIC only; stats::BIC(fit) + m*log(N) to count selected breakpoint locations",
+  "criterion_formula": "-2 log L + (2m + p + 2) log N",
+  "aic_used": false,
+  "aicc_used": false,
+  "search_algorithm": "changepointGA cptgaisl island genetic algorithm",
+  "runs_per_initialization_mode": 5,
+  "initialization_modes": [
+    "outcome-independent evenly spaced structured starts",
+    "fully random"
+  ],
+  "ga_parameters": {
+    "population_size": 100,
+    "number_of_islands": 5,
+    "initial_change_probability": 0.12,
+    "maximum_migrations": 150,
+    "generations_per_migration": 30,
+    "convergence_migrations": 25
+  },
+  "n_months": 34,
+  "period": "2022-03 through 2024-12",
+  "r_version": "4.4.3",
+  "r_changepointGA_version": "0.1.4",
+  "rpy2_version": "3.6.4",
+  "numpy_version": "2.3.4",
+  "pandas_version": "2.3.3",
+  "statsmodels_version": "0.14.5",
+  "approved_reporting_models": {
+    "Polarization": [
+      {
+        "reporting_role": "selected_primary",
+        "candidate_label": "Selected three-break AR(2)",
+        "ar_order": 2,
+        "tau": [
+          7,
+          14,
+          19
+        ],
+        "selection_basis": "minimum joint BIC among the focused polarization candidates"
+      },
+      {
+        "reporting_role": "required_alternative",
+        "candidate_label": "Competitive four-break AR(2)",
+        "ar_order": 2,
+        "tau": [
+          7,
+          11,
+          15,
+          19
+        ],
+        "selection_basis": "required disclosure because the model remains competitive"
+      }
+    ],
+    "Party Brand Index": [
+      {
+        "reporting_role": "selected_primary",
+        "candidate_label": "Selected one-break AR(0)",
+        "ar_order": 0,
+        "tau": [
+          19
+        ],
+        "selection_basis": "minimum joint BIC under every examined duration"
+      },
+      {
+        "reporting_role": "required_alternative",
+        "candidate_label": "No-break AR(1) comparator",
+        "ar_order": 1,
+        "tau": [],
+        "selection_basis": "structural-change comparator"
+      }
+    ]
+  },
+  "primary_sources": [
+    {
+      "citation": "Lund, R., Beaulieu, C., Killick, R., Lu, Q., & Shi, X. (2023). Good Practices and Common Pitfalls in Climate Time Series Changepoint Techniques: A Review. Journal of Climate, 36(23), 8041-8057.",
+      "doi": "10.1175/JCLI-D-22-0954.1",
+      "role": "common-AR mean-shift estimand, joint penalized likelihood, and BIC location penalty"
+    },
+    {
+      "citation": "Li, M., & Lu, Q. (2024). changepointGA: An R package for Fast Changepoint Detection via Genetic Algorithms.",
+      "url": "https://arxiv.org/abs/2410.15571",
+      "role": "joint stochastic optimization of changepoints and AR order"
+    },
+    {
+      "citation": "Beaulieu, C., & Killick, R. (2018). Distinguishing Trends and Shifts from Memory in Climate Data. Journal of Climate, 31(23), 9519-9543.",
+      "doi": "10.1175/JCLI-D-17-0863.1",
+      "role": "need to distinguish persistent structural shifts from autoregressive memory"
+    }
+  ],
+  "important_limitation": "The genetic algorithm is stochastic; repeated outcome-independent structured and random starts quantify search convergence.",
+  "random_stream_contract": {
+    "master_seed": 42,
+    "named_child_streams": {
+      "diagnostic_plot_jitter": {
+        "namespace": "joint_ar_breakpoint_diagnostic_plot_jitter",
+        "seed": 70343254282022435157218389545541967652,
+        "role": "deterministic display jitter only; no analytical effect"
+      }
+    },
+    "approved_historical_exception": {
+      "stream": "joint_genetic_search_seed_grid",
+      "rule": "structured base 3100 or random base 4100, plus minimum regime duration times 100, replicate number, and a 50-unit Party Brand Index offset",
+      "reason": "retain the validated deterministic production search grid and its independent receipt"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+model_id,series,reporting_role,regime,start_index_1based,end_index_1based,start_date,end_date,duration_months,sample_mean,structural_regime_mean,adjacent_structural_shift
+Polarization_selected_primary_K3_AR2,Polarization,selected_primary,1,1,6,2022-03,2022-08,6,27.19990118787781,28.20200642043469,
+Polarization_selected_primary_K3_AR2,Polarization,selected_primary,2,7,13,2022-09,2023-03,7,37.32849604291318,37.27351926137778,9.07151284094309
+Polarization_selected_primary_K3_AR2,Polarization,selected_primary,3,14,18,2023-04,2023-08,5,28.97492122930987,28.742861655944164,-8.530657605433614
+Polarization_selected_primary_K3_AR2,Polarization,selected_primary,4,19,34,2023-09,2024-12,16,39.75876861333296,39.90849726424197,11.165635608297809
+Polarization_required_alternative_K4_AR2,Polarization,required_alternative,1,1,6,2022-03,2022-08,6,27.19990118787781,28.144890183245135,
+Polarization_required_alternative_K4_AR2,Polarization,required_alternative,2,7,10,2022-09,2022-12,4,39.24745922302874,38.567677021571214,10.422786838326079
+Polarization_required_alternative_K4_AR2,Polarization,required_alternative,3,11,14,2023-01,2023-04,4,34.20188371964184,34.62178417800533,-3.945892843565886
+Polarization_required_alternative_K4_AR2,Polarization,required_alternative,4,15,18,2023-05,2023-08,4,28.094176669064822,28.02264408635325,-6.599140091652078
+Polarization_required_alternative_K4_AR2,Polarization,required_alternative,5,19,34,2023-09,2024-12,16,39.75876861333296,39.936323299549066,11.913679213195817
+Party Brand Index_selected_primary_K1_AR0,Party Brand Index,selected_primary,1,1,18,2022-03,2023-08,18,53.71945657561394,53.71945657561568,
+Party Brand Index_selected_primary_K1_AR0,Party Brand Index,selected_primary,2,19,34,2023-09,2024-12,16,61.2980214159971,61.29802141599746,7.57856484038178
+Party Brand Index_required_alternative_K0_AR1,Party Brand Index,required_alternative,1,1,34,2022-03,2024-12,34,57.285840029911895,57.119334684150225,

@@ -1,0 +1,103 @@
+======================================================================
+MANUAL GROUND-TRUTH VALIDATION REPORT
+======================================================================
+
+Timestamp: 2026-01-21 14:57:12
+Model: gpt-5.1-2025-11-13
+Sentences: 50
+Tolerance: ¡À15 points
+
+======================================================================
+PAIRWISE INTER-RATER RELIABILITY SUMMARY
+======================================================================
+
+
+Coder 1 vs Coder 2:
+----------------------------------------
+  NA Assignment Agreement: 99.0%
+    Both marked as NA:     154 (77.0%)
+    Both gave scores:      44 (22.0%)
+    Disagreed on NA:       2 (1.0%)
+
+  Score Correlations (n=44 pairs with both numeric):
+    Pearson r:           0.981 (p=0.0000)
+    ICC:                 0.981 (excellent)
+    Lin's CCC:           0.980
+    MAE:                 4.7
+    RMSE:                6.8
+    Accuracy (¡À15):     100%
+    Systematic Bias:     -1.5
+
+  By Dimension:
+    Q1:
+      NA Agreement: 100.0% (Both NA: 15, Both Score: 35, Disagree: 0)
+      Score Corr: r=0.980, MAE=4.9, n=35
+    Q2:
+      NA Agreement: 98.0% (Both NA: 44, Both Score: 5, Disagree: 1)
+      Score Corr: r=0.993, MAE=6.0, n=5
+    Q3:
+      NA Agreement: 100.0% (Both NA: 48, Both Score: 2, Disagree: 0)
+    Q4:
+      NA Agreement: 98.0% (Both NA: 47, Both Score: 2, Disagree: 1)
+
+LLM vs Coder 1:
+----------------------------------------
+  NA Assignment Agreement: 88.5%
+    Both marked as NA:     135 (67.5%)
+    Both gave scores:      42 (21.0%)
+    Disagreed on NA:       23 (11.5%)
+
+  Score Correlations (n=42 pairs with both numeric):
+    Pearson r:           0.821 (p=0.0000)
+    ICC:                 0.799 (good)
+    Lin's CCC:           0.795
+    MAE:                 13.1
+    RMSE:                22.0
+    Accuracy (¡À15):     69%
+    Systematic Bias:     -8.6
+
+  By Dimension:
+    Q1:
+      NA Agreement: 90.0% (Both NA: 13, Both Score: 32, Disagree: 5)
+      Score Corr: r=0.811, MAE=13.6, n=32
+    Q2:
+      NA Agreement: 74.0% (Both NA: 32, Both Score: 5, Disagree: 13)
+      Score Corr: r=0.862, MAE=14.0, n=5
+    Q3:
+      NA Agreement: 98.0% (Both NA: 47, Both Score: 2, Disagree: 1)
+    Q4:
+      NA Agreement: 92.0% (Both NA: 43, Both Score: 3, Disagree: 4)
+      Score Corr: r=0.998, MAE=8.3, n=3
+
+LLM vs Coder 2:
+----------------------------------------
+  NA Assignment Agreement: 87.5%
+    Both marked as NA:     135 (67.5%)
+    Both gave scores:      40 (20.0%)
+    Disagreed on NA:       25 (12.5%)
+
+  Score Correlations (n=40 pairs with both numeric):
+    Pearson r:           0.789 (p=0.0000)
+    ICC:                 0.759 (good)
+    Lin's CCC:           0.754
+    MAE:                 14.9
+    RMSE:                24.1
+    Accuracy (¡À15):     65%
+    Systematic Bias:     -10.1
+
+  By Dimension:
+    Q1:
+      NA Agreement: 90.0% (Both NA: 13, Both Score: 32, Disagree: 5)
+      Score Corr: r=0.795, MAE=14.2, n=32
+    Q2:
+      NA Agreement: 72.0% (Both NA: 32, Both Score: 4, Disagree: 14)
+      Score Corr: r=0.815, MAE=25.0, n=4
+    Q3:
+      NA Agreement: 98.0% (Both NA: 47, Both Score: 2, Disagree: 1)
+    Q4:
+      NA Agreement: 90.0% (Both NA: 43, Both Score: 2, Disagree: 5)
+
+
+======================================================================
+STATUS: PASS
+======================================================================

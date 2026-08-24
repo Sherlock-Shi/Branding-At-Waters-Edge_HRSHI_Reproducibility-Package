@@ -1,0 +1,5 @@
+series,reporting_role,model,n_observations,n_breakpoints,ar_order,break_onset_dates,joint_selection_bic,delta_bic,structural_regime_means,adjacent_structural_shifts,ljung_box_p_lag8,selection_basis
+Polarization,selected_primary,Selected three-break AR(2),34,3,2,2022-09|2023-04|2023-09,218.41152818880488,0.0,28.202006 | 37.273519 | 28.742862 | 39.908497,9.071513 | -8.530658 | 11.165636,0.1570320176686725,minimum joint BIC among the focused polarization candidates
+Polarization,required_alternative,Competitive four-break AR(2),34,4,2,2022-09|2023-01|2023-05|2023-09,219.65991961263865,1.2483914238337377,28.144890 | 38.567677 | 34.621784 | 28.022644 | 39.936323,10.422787 | -3.945893 | -6.599140 | 11.913679,0.0961104797094314,required disclosure because the model remains competitive
+Party Brand Index,selected_primary,Selected one-break AR(0),34,1,0,2023-09,215.4820480251376,0.0,53.719457 | 61.298021,7.578565,0.1616810600743033,minimum joint BIC under every examined duration
+Party Brand Index,required_alternative,No-break AR(1) comparator,34,0,1,none,224.8307443490581,9.348696323920535,57.119335,,0.0499439224375004,structural-change comparator

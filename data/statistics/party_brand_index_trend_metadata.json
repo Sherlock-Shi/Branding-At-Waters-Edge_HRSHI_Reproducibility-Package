@@ -1,0 +1,24 @@
+{
+  "generated_utc": "2026-07-21T11:13:20.533738+00:00",
+  "hamed_rao_reference": {
+    "authors": "K. H. Hamed and A. Ramachandra Rao",
+    "doi": "10.1016/S0022-1694(97)00125-X",
+    "journal": "Journal of Hydrology",
+    "title": "A modified Mann-Kendall trend test for autocorrelated data",
+    "volume_issue_pages": "204(1-4), 182-196",
+    "year": 1998
+  },
+  "input_file": "D:\\A1 Updated Paper 3\\UKRAID-Politicization\\Factiva_Data\\pipeline_c\\llm_statistics\\party_brand_index_timeseries.csv",
+  "input_sha256": "d9d9930fb86dcee50aa4fb41013e037c0448fca3ca0d623be013a45207de7db2",
+  "lag_selection": "lag 3 retained because the reconstructed raw series has its only approximately significant raw-series autocorrelation within the first three lags at lag 3; the Hamed-Rao calculation itself uses significant detrended-rank autocorrelations",
+  "schema": "paper3-party-brand-trend-analysis-v1",
+  "sen_reference": {
+    "authors": "Pranab Kumar Sen",
+    "doi": "10.1080/01621459.1968.10480934",
+    "journal": "Journal of the American Statistical Association",
+    "title": "Estimates of the Regression Coefficient Based on Kendall's Tau",
+    "volume_issue_pages": "63(324), 1379-1389",
+    "year": 1968
+  },
+  "status": "pending independent numerical validation"
+}

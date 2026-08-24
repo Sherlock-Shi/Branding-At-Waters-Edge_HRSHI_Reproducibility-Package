@@ -1,0 +1,341 @@
+\section{Corpus query, coverage, and calendar}
+
+\subsection*{Source and query}
+
+We retrieved the corpus from Factiva for 1 March 2022 through 31 December 2024. The query restricted results to United States, English-language items classified as articles, webpages, or blogs, excluded pictures and the listed feed and subject categories, required more than 199 words, required at least one political actor term, and excluded headlines identifying live-update formats. We applied Factiva's exact-duplicate removal.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Search parameters}
+\begin{tabular}{@{}p{0.24\textwidth}p{0.70\textwidth}@{}}
+\toprule
+\textbf{Component} & \textbf{Setting} \\
+\midrule
+Date range & 1 March 2022 to 31 December 2024 \\
+Region and language & United States, English \\
+Format inclusion & Articles, webpages, blogs \\
+Minimum word count & 200 words \\
+Political actor terms & congress*, senate, sen., gov., governor, republican*, democrat*, biden, trump, rep., gop, representative*, pelosi, vance, rand paul, kirk, carlson, secretary, white house, speaker, legislator, lawmaker, capitol hill, majority leader, minority leader \\
+Source exclusions & Press releases, wire services, regulatory filings, congressional documents, government documents \\
+Content exclusions & Market news, corporate news, sports, abstracts, calendar items, images, letters, obituaries, people profiles, reviews, rankings \\
+Headline exclusions & ``live updates'', ``live blog'', ``ukraine live'', ``live coverage'', ``daily briefing'' \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{lstlisting}
+atleast5(ukrain*) and ((fmt=article or fmt=webpage or fmt=blog) not fmt=picture) and (rst=usa) and (rst=en) not (rst=freg or rst=prnasi or rst=prn or rst=twir or rst=tlgl or rst=wc57855 or rst=congdp or rst=uspeo or rst=indfed or rst=usgnd) not (ns=mcat or ns=ccat or ns=redit or ns=gspo or ns=nabst or ns=nadvtr or ns=ncal or ns=ncopro or ns=ncdig or ns=nfact or ns=nlist or ns=nhoc or ns=nimage or ns=nlet or ns=nobt or ns=npeo or ns=npan or ns=ntra or ns=nrmf or ns=nrvw or ns=nran or ns=nprpct) and wc>199 and (congress* or "senate" or "sen." or "gov." or "governor" or republican* or democrat* or "biden" or "trump" or "rep." or "gop" or representative* or "pelosi" or "vance" or "rand paul" or "kirk" or "carlson" or "secretary" or "white house" or "speaker" or "legislator" or "lawmaker" or "capitol hill" or "majority leader" or "minority leader") NOT hl=("live updates" or "live blog" or "ukraine live" or "live coverage" or "daily briefing")
+\end{lstlisting}
+
+The query defines the sampled news environment rather than a census of all United States news coverage. Its breadth supports consistent observation across outlets and across the study period, while the political actor requirement and the sentence rules in Supplementary Methods S2 focus the analytical sample on content attributable to one party.
+
+\subsection*{Sample flow}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Sample flow}
+\begin{tabular}{@{}p{0.34\textwidth}rp{0.46\textwidth}@{}}
+\toprule
+\textbf{Stage} & \textbf{Count} & \textbf{Meaning} \\
+\midrule
+Imported records & 24,721 & Records returned by the query before deduplication \\
+Duplicates removed & 1,089 & Matched on title and the first 50 characters of body text \\
+Records dated 1 January 2025 or later & 2 & Removed to enforce the study calendar \\
+Unique articles & 23,630 & Processing universe after deduplication and calendar enforcement \\
+Annotated sentences & 37,312 & Ukraine-relevant sentences attributable to one party \\
+Articles contributing scores & 11,819 & Unique articles supplying at least one scored sentence \\
+Article-party rows & 14,564 & Article by represented party records after within-article aggregation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The calendar contains 34 complete monthly intervals. No estimated onset, coefficient, or political event was used to select the starting month, the ending month, or the monthly interval. An article can contribute one Republican row, one Democratic row, or both, so party-specific article counts do not sum to the number of unique articles. Where an article carried no non-NA sentence score on a dimension, that article-dimension value remained missing rather than receiving a neutral score.
+
+\section{Sentence construction, relevance, party attribution, and masking}
+
+\subsection*{Sentence construction and relevance}
+
+We segmented article text with spaCy using the \texttt{en\_core\_web\_lg} model. We disabled named entity recognition, lemmatization, and text classification, because we required sentence boundaries rather than those outputs.
+
+A sentence was Ukraine relevant when it contained a case-insensitive, word-bounded match to at least one term in the following groups:
+
+\begin{table}[htbp]
+\centering\small
+\caption{Relevance terms}
+\begin{tabular}{@{}p{0.14\textwidth}p{0.80\textwidth}@{}}
+\toprule
+\textbf{Group} & \textbf{Terms} \\
+\midrule
+Core & ukraine, ukrainian, kyiv, kiev \\
+People & zelenskyy, zelensky, zelenskiy \\
+Aid & ukraine aid, military aid, military assistance, ukraine funding, ukraine support, ukraine package, aid package, assistance package, security assistance \\
+Conflict & invasion, war in ukraine, ukraine conflict, ukraine crisis, special military operation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+No further relevance score filtered matched sentences. We retained the number of matched sentences within each article for the aggregation weight.
+
+\subsection*{Party attribution}
+
+Party attribution used two term lists that combined general party labels with names and title patterns for national leaders, senators, representatives, governors, and administration officials, drawn from the Congress Legislators Database together with prominent political figures relevant to Ukraine policy debates. A sentence entered the Republican category when it matched Republican terms and no Democratic terms, and entered the Democratic category under the reverse condition. Sentences matching both parties or neither were excluded. The rule establishes mutually exclusive attribution in the text. It does not assert that the position originated with a party organization, or that a journalist reported it without selection or framing. The complete term lists are deposited with the analysis code.
+
+\subsection*{Entity masking}
+
+Masking proceeded in a fixed order. First, we replaced known politician names with \texttt{[ENTITY]}. Second, we replaced an unknown person name following a political title with \texttt{[ENTITY]}. Third, we removed political titles and party labels. Fourth, we consolidated adjacent entity tokens into one.
+
+We preserved the terms ukraine, russia, kyiv, kiev, moscow, zelenskyy, zelensky, zelenskiy, putin, kremlin, white house, pentagon, and washington. Preserving them retains the substantive referents needed to score the four dimensions. A bounded diagnostic supplied Republican and Democratic labels to five constructed sentences and obtained identical dimension scores across each label pair. This supports the intended operation of masking on those cases. It does not establish that every contextual party cue was removed.
+
+\section{Annotation prompt and response contract}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Request settings}
+\begin{tabular}{@{}p{0.34\textwidth}p{0.56\textwidth}@{}}
+\toprule
+\textbf{Field} & \textbf{Value} \\
+\midrule
+Access & OpenAI Batch API, chat completions request \\
+Model & \texttt{gpt-5.1-2025-11-13} \\
+Temperature & 0 \\
+Maximum completion tokens & 100 \\
+Response format & JSON object \\
+Annotation unit & One masked sentence \\
+Requests submitted & 37,312 \\
+Requests completed & 37,312 \\
+Failed requests & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The model version was fixed before any downstream analysis and is the version evaluated by the human comparison in Supplementary Methods S4. We did not run a comparative model selection experiment, so we make no claim that this model outperforms alternatives on this task.
+
+The manuscript presents the prompt in reading order. The submitted string was:
+
+\begin{lstlisting}
+<TASK>
+You will rate a sentence from U.S. news media. The sentence contains [ENTITY], which masks a U.S. political party or politician.
+If multiple [ENTITY] appear in a sentence, they all refer to members of the same party.
+Answer FOUR questions about [ENTITY]'s position as expressed in this sentence.
+Answer based on ONLY what this sentence explicitly conveys. Do NOT infer which party [ENTITY] represents.
+Answer each question independently.
+</TASK>
+
+<QUESTIONS>
+
+Q1: What is [ENTITY]'s stance on providing military and financial aid to Ukraine?
+0 = Strong support for providing aid
+100 = Strong opposition to providing aid
+
+Q2: How does [ENTITY] characterize Ukraine?
+0 = Democratic ally defending Western values
+100 = Corrupt country / not a U.S. concern / futile cause
+
+Q3: Which strategic threat does [ENTITY] prioritize?
+0 = Russia as primary threat to contain
+100 = China/Indo-Pacific as primary strategic focus
+
+Q4: Where does [ENTITY] suggest resources should be allocated?
+0 = International commitments (NATO, alliances, global leadership)
+100 = Domestic priorities (border, infrastructure, economy)
+
+</QUESTIONS>
+
+<NA_GUIDANCE>
+Rate each question independently. Return "NA" for a question when:
+- Sentence is purely procedural (e.g., "The committee convened at 2pm")
+- Sentence mentions [ENTITY] but expresses no stance on that question (e.g., "[ENTITY] attended the briefing")
+- Sentence is about Ukraine but has no U.S. policy relevance (e.g., "Fighting continued in Kharkiv")
+</NA_GUIDANCE>
+
+<OUTPUT>
+JSON only.
+{"q1": <0-100|"NA">, "q2": <0-100|"NA">, "q3": <0-100|"NA">, "q4": <0-100|"NA">}
+</OUTPUT>
+
+<SENTENCE>
+{masked_sentence}
+</SENTENCE>
+\end{lstlisting}
+
+The parser accepted the lowercase keys \texttt{q1} through \texttt{q4}, converted numeric values within 0 to 100 to scores, converted a case-insensitive \texttt{NA} or a null value to missing, and recorded malformed responses separately. No response fell into that category.
+
+\section{Validation evidence and diagnostics}
+
+\subsection*{Human reference sample and metrics}
+
+The human reference sample comprised 50 sentences selected independently within party using random state 42, giving 25 Republican-attributed and 25 Democrat-attributed cases drawn from a 680-sentence pool. Two coders recorded a score from 0 to 100 or \texttt{NA} for each of the four dimensions in separate files. We verified sample identity, order, party balance, the merge of the two coder files, and unchanged input identities before calculating agreement.
+
+For each comparison, ratings counts sentence-dimension opportunities, both NA counts opportunities missing in both sources, both scored counts numeric pairs, and NA disagreement counts opportunities missing in only one source. Score metrics are the Pearson correlation \textit{r}, a two-way absolute-agreement single-measure intraclass correlation, Lin's concordance correlation coefficient, the mean absolute error, the root mean squared error, the proportion of pairs within 15 scale points, and the mean signed difference. Agreement on \texttt{NA} assignment was calculated across all 200 opportunities.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Overall agreement}
+\begin{tabular}{@{}p{0.22\textwidth}rrrrrrrrr@{}}
+\toprule
+\textbf{Comparison} & \textbf{Rat.} & \textbf{Both NA} & \textbf{Both sc.} & \textbf{NA dis.} & \textbf{NA agr.} & \textbf{\textit{r}} & \textbf{ICC} & \textbf{MAE} & \textbf{Bias} \\
+\midrule
+Coder 1 vs Coder 2 & 200 & 154 & 44 & 2 & .990 & .981 & .981 & 4.66 & $-$1.48 \\
+Model vs Coder 1 & 200 & 125 & 42 & 33 & .835 & .817 & .773 & 14.17 & $-$11.55 \\
+Model vs Coder 2 & 200 & 125 & 40 & 35 & .825 & .789 & .734 & 15.50 & $-$13.25 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\textwidth}\footnotesize \textit{Note.} The average of the two model-to-coder correlations is .803, which is 81.8\% of the inter-coder correlation. Their average \texttt{NA} agreement is .830. All three predeclared thresholds were met: an average score correlation of at least .70, at least .75 of the inter-coder correlation, and average \texttt{NA} agreement of at least .80.\end{minipage}
+\end{table}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Agreement by dimension, Coder 1 against Coder 2}
+\begin{tabular}{@{}p{0.30\textwidth}rrrrrr@{}}
+\toprule
+\textbf{Dimension} & \textbf{NA agr.} & \textbf{Pairs} & \textbf{\textit{r}} & \textbf{ICC} & \textbf{MAE} & \textbf{Bias} \\
+\midrule
+General Ukraine Aid Stance & 1.000 & 35 & .980 & .981 & 4.86 & $-$0.86 \\
+Ukraine Characterization & .980 & 5 & .993 & .975 & 6.00 & $-$6.00 \\
+Threat Priority & 1.000 & 2 & --- & --- & --- & --- \\
+Resource Allocation & .980 & 2 & --- & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\textwidth}\footnotesize \textit{Note.} Threat Priority and Resource Allocation yielded two numeric pairs each, which is too few to estimate agreement. General Ukraine Aid Stance supplied 35 of the 44 numeric pairs, so the overall figure describes reproducibility of the instructions principally for that dimension.\end{minipage}
+\end{table}
+
+\subsection*{Sampling variability of the agreement metrics}
+
+We resampled the 50-sentence reference set 5,000 times with replacement, clustering on sentence so that all four dimension ratings for a sentence move together, and recomputed the metrics in each replicate. The 95\% percentile interval for the inter-coder correlation is $[.972, .989]$, and for the mean absolute error $[3.23, 6.22]$. Recomputing the three predeclared criteria in each replicate, all three clear in 73.96\% of replicates. This variability follows from the size of the reference sample rather than from instability in the annotation, since the criteria rest on 44 paired numeric scores.
+
+\subsection*{Score comparison across annotation runs}
+
+The 680 sentences in the reference pool were annotated on two occasions under the same configuration. Comparing the two runs, 225 sentences differ on at least one dimension. Exact agreement was 535 of 680 on General Ukraine Aid Stance, 601 on Ukraine Characterization, 644 on Threat Priority, and 609 on Resource Allocation. Both sets of scores clear the predeclared thresholds.
+
+\subsection*{Test-retest repeatability}
+
+We scored 171 annotation rows three times under the same configuration within a single run.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Test-retest repeatability}
+\begin{tabular}{@{}p{0.32\textwidth}rrr@{}}
+\toprule
+\textbf{Dimension} & \textbf{Sentences} & \textbf{ICC} & \textbf{Mean within-sentence \textit{SD}} \\
+\midrule
+General Ukraine Aid Stance & 24 & .999 & 0.35 \\
+Ukraine Characterization & 16 & .991 & 1.04 \\
+Threat Priority & 7 & 1.000 & 0.00 \\
+Resource Allocation & 10 & .995 & 0.71 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\textwidth}\footnotesize \textit{Note.} Average ICC is .996 and the average within-sentence standard deviation is 0.44 scale points. The Threat Priority figure rests on seven sentences that returned identical scores on every repeat, so it records an absence of observed variation rather than a precise estimate.\end{minipage}
+\end{table}
+
+\subsection*{Scope}
+
+This evidence supports agreement between the model and human coders on this corpus and this sample. It does not establish that the four dimensions capture what voters perceive, and it does not imply that individual sentences are scored without error.
+
+\section{Joint article-cluster uncertainty}
+
+\subsection*{Replicate count and streams}
+
+We set the replicate count through a pilot and escalation rule. A 500-replicate pilot established runtime feasibility. At a nested 2,000-replicate checkpoint, the largest deviation in interval length from the 5,000-replicate reference sequence was 26.67\%, in a cell with a tied raw $IQR$. A separate 5,000-replicate stream then assessed full-sequence stability. Across 816 interval lengths, 98.65\% differed by less than 10\% between the two streams, and every Party Brand Index interval met that threshold, with a maximum relative difference of 6.80\%. This is the rule we adopted for this study rather than a general recommendation about the number of bootstrap replicates.
+
+Percentile intervals use the 2.5th and 97.5th percentiles with linear interpolation. A reported interval required at least 0.95 of its replicate values to be finite. Raw $IQR$ required at least four contributing articles in a party-month cell.
+
+\subsection*{Recalculated calibration}
+
+Both the coherence calibration constant $k$ and the polarization normalization constant $M$ are calculated from the observed series. We therefore recalculated both within every replicate, using that replicate's own party medians and observed maximum, so that their sampling variation enters the Party Brand Index intervals rather than being held fixed at the observed values.
+
+\subsection*{Months with limited support}
+
+The observed July 2022 General Ukraine Aid Stance cells contained 12 Republican and 121 Democratic contributing articles, so both raw $IQR$ values and the observed Party Brand Index are estimable. Eleven of the 5,000 draws selected only one to three eligible Republican articles for that month. In those draws the Republican weighted mean and polarization remain finite, while Republican raw $IQR$, Republican coherence, and the Party Brand Index are not estimable. All draw identities remain in the replicate file, no value was imputed, and the month was not treated as absent. July therefore has 4,989 valid Party Brand Index replicates and every other month has 5,000.
+
+\subsection*{What these intervals cover}
+
+These pointwise intervals quantify variation associated with the articles that entered the corpus, under resampling within month. Preserving complete article clusters maintains the covariance across parties and across dimensions. Serial dependence is handled by the temporal procedures. Variation attributable to alternative annotation, to selecting the structural model, or to audience outcomes lies outside what these intervals cover.
+
+\section{Estimand construction and reporting boundaries}
+
+\subsection*{Sen rank-order interval}
+
+For every pair of months with $i<j$, the pairwise slope on the one-month scale is $q_{ij}=(y_j-y_i)/(j-i)$, and the Sen estimate is the median of the 561 sorted slopes. For a 95\% interval we used the Hamed-Rao variance of $S$ in Sen's rank-order construction, selecting the endpoints from the ordered slopes at the ranks based on $(561 \pm z_{.025}\,\sigma_S)/2$, where $\sigma_S$ is the square root of that variance. When the correction factor equals one, this reduces to the ordinary Sen rank-order interval. The correction factor is 1.000 for all four reported series, so the adjustment left the variance unchanged. The slope is reported in scale points per month and is not the fitted endpoint difference divided by elapsed time.
+
+\subsection*{Identity between the paired contrast and the polarization slope}
+
+Let $R_t$ and $D_t$ denote the monthly Republican and Democratic positions. For every common month pair,
+\[
+q^{R}_{ij}-q^{D}_{ij}=\frac{R_j-R_i}{j-i}-\frac{D_j-D_i}{j-i}=\frac{(R_j-D_j)-(R_i-D_i)}{j-i}.
+\]
+Every paired difference is therefore exactly a pairwise slope of the signed polarization series, and the median across all 561 pairs is that series' Sen slope. The corresponding $S$, $\tau$, $Z$, $p$, correction factor, and rank-order interval are inherited from the polarization series rather than estimated separately. The comparison retains the direction of both parties' movement on the common scale, so Democratic movement toward opposition carries a positive slope and Democratic movement toward support carries a negative one. The two marginal party slopes and their arithmetic difference remain descriptive summaries of each trajectory, because subtraction does not commute with taking medians.
+
+\subsection*{Partition of the ordering statistic}
+
+We additionally partition the Mann-Kendall statistic into pairs whose endpoints lie within the same selected regime and pairs whose endpoints cross a regime boundary. That partition is an arithmetic description of $S$ rather than a second hypothesis test.
+
+\subsection*{Autoregressive transformation in the coherence model}
+
+Two error structures were compared by BIC: independent innovation vectors across months, and a common first-order autoregressive structure in which both party equations are transformed with the same stationary coefficient $\phi$. The coefficient was estimated within the stationary search bound $-0.95 < \phi < 0.95$. Under that structure the first observation used the stationary scaling $\sqrt{1-\phi^{2}}$ applied to both the outcome vector and the design matrix, and later observations used $Y_t-\phi Y_{t-1}$ with the same transformation of the design. The innovation vector carried an unrestricted $2\times2$ contemporaneous covariance matrix, which changes the joint weighting and the coefficient uncertainty without adding a lagged outcome or altering the conditional mean.
+
+\subsection*{Decision rule for the coherence hypothesis}
+
+Because lower raw $IQR$ indicates greater message coherence, the symmetric prediction requires a negative polarization coefficient $\beta_p$ for both parties. Support requires, for each party, a negative point coefficient, a two-sided 95\% conditional interval below zero, and a 95\% interval across the 4,989 complete measurement panels below zero. The comparison against the alternative error structure is a sensitivity check, and a coefficient sign reversal under that structure precludes a symmetric claim. The party contrast $\beta_R-\beta_D$ is reported separately. The design tests contemporaneous association and does not identify a causal effect of polarization on message production.
+
+\subsection*{Reporting boundary for estimated onsets}
+
+The structural model reports estimated onsets, selected regime levels, innovation diagnostics, and the required alternative accounts. Its uncertainty statements are conditional on the selected structure, because selected dates have neither individual $p$ values nor calibrated post-selection coverage. Independent validation reloaded both series and reproduced the likelihoods, selection scores, coefficients, regime levels, one-step fits, innovations, autocorrelation functions, Ljung-Box diagnostics, and regime arithmetic. Agreement across repeated starts and across duration rules diagnoses numerical and specification stability; neither is a bootstrap sample. Event chronology is assembled independently and can be compared with estimated onsets only after selection, so temporal alignment remains contextual rather than causal evidence.
+
+\section{Cross-dimensional General Dominance and sensitivity}
+
+\subsection*{Incremental contributions}
+
+For every predictor subset $S$, ordinary least squares supplied the model $R^{2}$. For a predictor $j$ not in $S$, its incremental contribution was
+\[
+\Delta_j(S)=R^{2}(S\cup\{j\})-R^{2}(S).
+\]
+The conditional contribution at each subset size is the mean of those increments across all subsets of that size omitting $j$, and General Dominance is the mean of the conditional contributions across subset sizes. The three contributions sum to the complete model $R^{2}$, and that identity is enforced. General Dominance is the technical name of the decomposition rather than a claim that one dimension dominates another substantively. Every contribution is conditional on this predictor set, these monthly scales, and this sample.
+
+\subsection*{Two uncertainty layers}
+
+The temporal layer resampled the observed monthly vectors. The combined layer paired every temporal draw with one randomly selected complete four-dimensional panel from the article-cluster stream. Of 5,000 requested panels, 2,704 were complete across all 34 months and all four dimensions, with sparse Threat Priority cells accounting for the incomplete panels. The same panel supplied all months in a replicate before the month indices were applied.
+
+Two layers crossed with three block lengths give six prespecified cells and 30,000 evaluations. For the two prespecified contrasts, Resource Allocation minus Ukraine Characterization and Resource Allocation minus Threat Priority, the combined layer at block length four used a common simultaneous radius, being the 95th percentile of the replicate maximum absolute deviation across the two contrasts. These intervals are sensitivity evidence, because the series is short, some measurement panels are incomplete, and two of the three explanatory dimensions have sparse human criterion support. Their role remains descriptive. They do not support substantive dominance of one dimension, predictive priority, confirmatory superiority, temporal precedence, or causation.
+
+\section{Software and uncertainty layers}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Software}
+\begin{tabular}{@{}p{0.28\textwidth}p{0.12\textwidth}p{0.50\textwidth}@{}}
+\toprule
+\textbf{Component} & \textbf{Version} & \textbf{Role} \\
+\midrule
+Python & 3.11.9 & Data, measurement, validation, and statistical orchestration \\
+R & 4.4.3 & Structural search and dominance runtime \\
+rpy2 & 3.6.4 & Embedded R bridge \\
+spaCy & 3.8.7 & Sentence segmentation \\
+\texttt{en\_core\_web\_lg} & 3.8.0 & Sentence model \\
+OpenAI Python package & 2.7.1 & Batch request interface \\
+NumPy & 2.3.4 & Numeric operations, percentiles, linear algebra \\
+pandas & 2.3.3 & Data transformation and aggregation \\
+SciPy & 1.16.3 & Optimization and distributions \\
+statsmodels & 0.14.5 & Time-series diagnostics \\
+pyMannKendall & 1.4.3 & Hamed-Rao and ordinary Mann-Kendall calculations \\
+\texttt{changepointGA} & 0.1.4 & Island genetic search for the joint structural models \\
+\texttt{dominanceanalysis} & 2.1.1 & General Dominance decomposition \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering\small
+\caption{What each uncertainty layer covers}
+\begin{tabular}{@{}p{0.26\textwidth}p{0.34\textwidth}p{0.32\textwidth}@{}}
+\toprule
+\textbf{Layer} & \textbf{What it covers} & \textbf{What it does not cover} \\
+\midrule
+Agreement bootstrap & Sampling variation in the agreement metrics and the threshold decision & Sparse numeric support on three dimensions; no voter-level validity claim \\
+Article-cluster bootstrap & Article-sampling variation and covariance across parties and dimensions & Annotation variation, serial dependence, structural selection, event attribution, audience outcomes \\
+Hamed-Rao adjustment & Evaluated autocorrelation in detrended ranks & Onset estimation \\
+Common-autoregressive likelihoods & Serial dependence within the structural and coherence models & Model-selection uncertainty; causal coverage \\
+Repeated search starts & Numerical convergence of the search & Sampling uncertainty \\
+Stationary bootstrap & Dependence-aware sensitivity of the descriptive decomposition & Substantive dominance, confirmatory superiority, temporal precedence, causal priority \\
+\bottomrule
+\end{tabular}
+\end{table}

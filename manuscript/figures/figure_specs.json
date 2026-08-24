@@ -1,0 +1,136 @@
+{
+  "schema": "paper3-publication-figures-v1",
+  "style_version": "paper3-apa-monochrome-v4",
+  "palette_mode": "monochrome",
+  "reference_grammar": "gray raw observations and confidence shading; thin dashed labeled structural means; patterned open-marker comparisons; dashed breakpoint references with month labels",
+  "figures": {
+    "figure_2": {
+      "placement": "main",
+      "title": "Temporal Trajectory of Polarization and the Party Brand Index",
+      "panels": [
+        "General Ukraine Aid Stance Polarization",
+        "Party Brand Index"
+      ],
+      "period": [
+        "2022-03",
+        "2022-04",
+        "2022-05",
+        "2022-06",
+        "2022-07",
+        "2022-08",
+        "2022-09",
+        "2022-10",
+        "2022-11",
+        "2022-12",
+        "2023-01",
+        "2023-02",
+        "2023-03",
+        "2023-04",
+        "2023-05",
+        "2023-06",
+        "2023-07",
+        "2023-08",
+        "2023-09",
+        "2023-10",
+        "2023-11",
+        "2023-12",
+        "2024-01",
+        "2024-02",
+        "2024-03",
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12"
+      ],
+      "uncertainty": "pointwise article-cluster measurement intervals",
+      "does_not_cover": [
+        "breakpoint dates",
+        "model selection",
+        "serial-dependence estimation",
+        "LLM scoring"
+      ],
+      "non_color_cues": [
+        "gray observed circles",
+        "thin dashed black selected means with inline values",
+        "gray dash-dot alternative means",
+        "dashed onset lines with arrows and month labels"
+      ]
+    },
+    "figure_3": {
+      "placement": "main",
+      "title": "Party Stance Trajectories and Direct Paired Change",
+      "panels": [
+        "monthly party stance",
+        "Sen slope intervals"
+      ],
+      "period": [
+        "2022-03",
+        "2022-04",
+        "2022-05",
+        "2022-06",
+        "2022-07",
+        "2022-08",
+        "2022-09",
+        "2022-10",
+        "2022-11",
+        "2022-12",
+        "2023-01",
+        "2023-02",
+        "2023-03",
+        "2023-04",
+        "2023-05",
+        "2023-06",
+        "2023-07",
+        "2023-08",
+        "2023-09",
+        "2023-10",
+        "2023-11",
+        "2023-12",
+        "2024-01",
+        "2024-02",
+        "2024-03",
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12"
+      ],
+      "inferential_role": "direct paired Republican-minus-Democratic slope contrast",
+      "non_color_cues": [
+        "solid filled circles",
+        "dashed open squares",
+        "dash-dot open diamond contrast"
+      ]
+    },
+    "figure_s2": {
+      "placement": "supplement",
+      "title": "Supplementary Structural Model Evidence",
+      "panels": [
+        "polarization comparison",
+        "Party Brand Index comparison",
+        "delta BIC",
+        "regime shifts"
+      ]
+    },
+    "figure_s3": {
+      "placement": "supplement",
+      "title": "Selected Model Innovation Diagnostics",
+      "panels": [
+        "polarization innovations",
+        "polarization ACF",
+        "Party Brand Index innovations",
+        "Party Brand Index ACF"
+      ],
+      "status": "diagnostic evidence, not substantive publication result"
+    }
+  }
+}
