@@ -1,4 +1,4 @@
-"""Aggregate immutable LLM annotations into observed article and monthly points.
+"""Aggregate LLM annotations into article and monthly observations.
 
 The aggregation stage creates stable article and sentence identifiers, article
 party scores, monthly weighted stance means, raw party-month IQR, and monthly
@@ -80,9 +80,9 @@ class LLMAggregator:
         return article, monthly_stance, monthly_polarization
 
     def _load_input(self) -> pd.DataFrame:
-        """Load immutable annotations, construct stable IDs, and retain successes."""
+        """Load annotations, construct stable identifiers, and retain scored rows."""
 
-        print("\n[1/5] Loading immutable completed LLM annotations...")
+        print("\n[1/5] Loading LLM annotations...")
         if not os.path.exists(self.INPUT_CSV):
             raise FileNotFoundError(f"Input file not found: {self.INPUT_CSV}")
         frame = pd.read_csv(self.INPUT_CSV)

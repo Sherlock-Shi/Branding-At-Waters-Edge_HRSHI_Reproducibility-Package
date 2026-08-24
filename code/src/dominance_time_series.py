@@ -1,6 +1,6 @@
 """Observed-level general dominance with dependence-preserving resampling.
 
-The analysis retains the monthly Q1 through Q4 polarization vector intact. It
+The analysis retains the monthly General Ukraine Aid Stance, Ukraine Characterization, Threat Priority, and Resource Allocation polarization vector intact. It
 uses a stationary bootstrap of month indices for temporal dependence and pairs
 each temporal draw with one complete joint article-cluster measurement panel.
 The resampling results are treated as dependence-aware sensitivity evidence

@@ -463,7 +463,7 @@ def run_h3_analysis(
     measurement_replicate_file: Path | str,
     output_dir: Path | str,
 ) -> dict[str, pd.DataFrame]:
-    """Fit, propagate measurement uncertainty, and write the H3 contract."""
+    """Fit, propagate measurement uncertainty, and write the H3 specification."""
 
     polarization_file = Path(polarization_file)
     coherence_file = Path(coherence_file)

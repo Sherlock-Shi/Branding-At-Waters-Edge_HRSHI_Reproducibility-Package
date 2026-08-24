@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the complete Party Brand Index temporal-trend reporting contract."""
+"""Run the complete Party Brand Index temporal-trend reporting specification."""
 
 from __future__ import annotations
 

@@ -1,6 +1,6 @@
-"""Production Party Brand Index measurement contract.
+"""Production Party Brand Index measurement specification.
 
-The contract begins with the promoted article-level aggregation and writes only
+The specification begins with the promoted article-level aggregation and writes only
 downstream statistical derivatives. It uses one joint within-month
 article-cluster bootstrap so stance, polarization, raw IQR, message coherence,
 and the Party Brand Index share the same resampling stream.
@@ -67,7 +67,7 @@ def run_party_brand_measurement(
     master_seed: int = 42,
     namespace: str = "joint_article_cluster_measurement",
 ) -> PartyBrandMeasurementRun:
-    """Generate the validated production measurement contract.
+    """Generate the validated production measurement specification.
 
     The observed stance and polarization formulas remain unchanged. Article
     count enters only through the joint resampling distribution. Every Party

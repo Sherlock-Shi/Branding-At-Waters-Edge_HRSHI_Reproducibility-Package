@@ -6,10 +6,8 @@ import re
 import sys
 from pathlib import Path
 
-# A Conda environment launched through its python.exe does not receive the DLL
-# search paths that `conda activate` normally supplies. Register them before
-# importing NumPy/Pandas so BLAS, LAPACK, and the optional embedded R runtime
-# remain available to the centralized command on Windows.
+# On Windows, make bundled R and its libraries discoverable when running under
+# a Conda environment. The guarded registration is a no-op on macOS and Linux.
 _RUNTIME_DLL_HANDLES = []
 if os.name == "nt":
     runtime_directories = [
@@ -47,7 +45,7 @@ if hasattr(sys.stderr, "reconfigure"):
 DATA_PATH = str(config.DATA_ROOT)
 PIPELINE_C_PATH = DATA_PATH
 
-RETIRED_UPSTREAM_FLAGS = (
+UNSUPPORTED_FLAGS = (
     "--llm_submit",
     "--llm_status",
     "--llm_download",
@@ -131,7 +129,7 @@ def run_statistical_tests(
     resolved_output = output_dir or os.path.join(PIPELINE_C_PATH, "statistics")
     article_file = os.path.join(resolved_input, "article_level_scores.csv")
 
-    print("\nGenerating the joint article-cluster measurement contract...")
+    print("\nGenerating the joint article-cluster bootstrap...")
     from src.party_brand_measurement import run_party_brand_measurement
 
     measurement_run = run_party_brand_measurement(
@@ -160,7 +158,7 @@ def run_statistical_tests(
         Path(resolved_output),
     )
     print(
-        "\nRunning the joint common-AR segmented-likelihood search "
+        "\nRunning the joint common-AR regime-likelihood search "
         "with location-adjusted BIC..."
     )
     from scripts.joint_ar_breakpoint_analysis import (
@@ -394,7 +392,7 @@ Examples:
     actions.add_argument(
         "--downstream",
         action="store_true",
-        help="Run aggregation, statistics, and visualization from immutable LLM scores",
+        help="Run aggregation, statistics, and visualization from the scored sentence file",
     )
     parser.add_argument(
         "--output_root",
@@ -424,11 +422,11 @@ Examples:
 
     raw_args = list(sys.argv[1:] if argv is None else argv)
     requested_upstream = [
-        token for token in raw_args if token in RETIRED_UPSTREAM_FLAGS
+        token for token in raw_args if token in UNSUPPORTED_FLAGS
     ]
     if requested_upstream:
         parser.error(
-            "Unsupported arguments: " + ", ".join(requested_upstream)
+            "Flags not available in this distribution: " + ", ".join(requested_upstream)
         )
     args = parser.parse_args(raw_args)
     config.set_data_root(args.data_root)

@@ -1,6 +1,6 @@
-"""LLM Batch Scorer for Pipeline C.
+"""LLM Batch Annotation for Pipeline C.
 
-Scores sentences using OpenAI's Batch API for multi-dimensional ideology analysis.
+Annotates sentences using OpenAI's Batch API for multi-dimensional ideology analysis.
 
 Workflow:
     1. Submit: Converts sentences to JSONL, uploads, creates batch job
@@ -37,7 +37,7 @@ from src.config import DATA_PATH
 
 class LLMBatchScorer:
     """
-    Batch API scorer for multi-dimensional ideology analysis.
+    Batch API annotation for multi-dimensional ideology analysis.
     
     Manages the full lifecycle: submit → poll → download → save
     Includes safety guards against accidental re-submission.
@@ -101,7 +101,7 @@ JSON only.
 </SENTENCE>"""
     
     def __init__(self, output_dir: Optional[str] = None):
-        """Initialize the batch scorer."""
+        """Initialize the batch annotation client."""
         requested_output = os.path.realpath(
             os.path.abspath(output_dir or self.OUTPUT_DIR)
         )
@@ -192,10 +192,10 @@ JSON only.
     
     def is_scoring_complete(self) -> bool:
         """
-        Check if scoring is complete and output file exists.
+        Check if annotation is complete and output file exists.
         
         Returns:
-            True if scoring is complete and output file exists
+            True if annotation is complete and output file exists
         """
         if not os.path.exists(self.LOG_PATH):
             return False
@@ -369,7 +369,7 @@ JSON only.
         Returns batch_id or raises exception.
         """
         print("\n" + "=" * 70)
-        print("LLM BATCH SCORER - SUBMITTING BATCH")
+        print("LLM BATCH ANNOTATION - SUBMITTING BATCH")
         print("=" * 70)
         
         # Step 1: Load input data
@@ -568,10 +568,10 @@ JSON only.
         8. Save to OUTPUT_CSV
         9. Update log to status='downloaded'
         
-        Returns the scored DataFrame.
+        Returns the annotated DataFrame.
         """
         print("\n" + "=" * 70)
-        print("LLM BATCH SCORER - DOWNLOADING RESULTS")
+        print("LLM BATCH ANNOTATION - DOWNLOADING RESULTS")
         print("=" * 70)
         
         log = self._load_log()
@@ -687,7 +687,7 @@ JSON only.
         print("DOWNLOAD COMPLETE - SUMMARY")
         print("=" * 70)
         print(f"\nTotal sentences: {len(df):,}")
-        print(f"Successfully scored: {success_count:,}")
+        print(f"Successfully annotated: {success_count:,}")
         print(f"Errors: {error_count:,}")
         
         # NA rates per dimension
@@ -743,7 +743,7 @@ JSON only.
         df = self.download_results()
         
         print("\n" + "=" * 70)
-        print("BATCH SCORING COMPLETE")
+        print("BATCH ANNOTATION COMPLETE")
         print("=" * 70)
-        print(f"\nScored {len(df):,} sentences")
+        print(f"\nAnnotated {len(df):,} sentences")
         print(f"Output: {self.OUTPUT_CSV}")

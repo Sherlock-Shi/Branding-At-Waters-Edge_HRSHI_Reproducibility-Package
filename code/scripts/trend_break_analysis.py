@@ -526,7 +526,7 @@ def run_trend_break_analysis(
             atol=joint.OBJECTIVE_TOLERANCE,
             rtol=0,
         ):
-            raise RuntimeError("break-only refit does not match the validated search")
+            raise RuntimeError("break-only refit does not match the selected search")
 
         trend_row = trend_winners.loc[
             trend_winners["minimum_regime_duration"].eq(minimum_duration)

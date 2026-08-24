@@ -62,7 +62,7 @@ class LLMStatisticalTests:
         )
 
     def run(self) -> Dict[str, object]:
-        """Run the active reporting-input contract."""
+        """Run the active reporting-input specification."""
         logger = TeeLogger(self.LOG_FILE)
         original_stdout = sys.stdout
         sys.stdout = logger
@@ -76,7 +76,7 @@ class LLMStatisticalTests:
 
     def _run_active_contract(self) -> Dict[str, object]:
         print("=" * 72)
-        print("PAPER 3 ACTIVE POST-AGGREGATION STATISTICAL CONTRACT")
+        print("PAPER 3 ACTIVE POST-AGGREGATION STATISTICAL SPECIFICATION")
         print("=" * 72)
         print(f"Generated UTC: {datetime.now(timezone.utc).isoformat()}")
 
@@ -106,7 +106,7 @@ class LLMStatisticalTests:
         trend = self._write_trend_contract(stance, polarization, pbi)
         dominance_ready = self._write_dominance_ready(polarization)
 
-        print("Observed aggregation: raw-IQR production contract")
+        print("Observed aggregation: raw-IQR production specification")
         print("Measurement uncertainty: joint 5,000 article-cluster replicates")
         print("Trend rows written: 4")
         return {

@@ -532,7 +532,7 @@ def plot_structural_mean(
     decimals: int = 1,
     zorder: float = 4,
 ) -> None:
-    """Draw thin structural means and place each mean value on its segment."""
+    """Draw thin structural means and place each mean value on its regime."""
 
     if role not in {"selected", "alternative", "segment_mean"}:
         raise KeyError(f"unsupported structural-mean role: {role}")
@@ -636,7 +636,7 @@ def save_figure(
     formats: Sequence[str] = ("png", "pdf"),
     metadata: Mapping[str, str] | None = None,
 ) -> list[Path]:
-    """Export one figure through the shared 300 dpi raster and vector contract."""
+    """Export one figure through the shared 300 dpi raster and vector specification."""
 
     output_stem = Path(output_stem)
     output_stem.parent.mkdir(parents=True, exist_ok=True)

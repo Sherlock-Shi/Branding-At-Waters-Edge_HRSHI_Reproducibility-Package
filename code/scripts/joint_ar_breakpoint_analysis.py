@@ -1,21 +1,19 @@
 #!/usr/bin/env python3
-"""Jointly select mean-shift breakpoints and a common AR order by BIC.
+"""Jointly select mean shifts and a common AR order by BIC.
 
-This is the dependence-aware replacement for the provisional two-stage
-candidate comparison.  It fits
+It fits
 
     y_t = mu_t + e_t,    phi(B)e_t = u_t,
 
 where ``mu_t`` is piecewise constant and one stationary AR(p) process is
-shared across every regime.  The breakpoint count, locations, and p in
+shared across every regime.  The shift count, onsets, and p in
 {0, 1, 2} are optimized together with the island genetic algorithm in R
 ``changepointGA``.  The objective is the mean-shift BIC described by Lund et
 al. (2023): the ordinary fitted-model BIC plus ``m * log(n)`` to count the
-estimated locations of the m changepoints.  AIC and AICc are not used.
+estimated onsets of the m shifts.  AIC and AICc are not used.
 
 The analysis repeats outcome-independent structured and random initializations for minimum regime
 durations of 3, 4, 5, and 6 months.  Outputs are derivative research records.
-They do not alter the immutable Factiva-to-LLM-annotation provenance chain.
 """
 
 from __future__ import annotations
@@ -56,8 +54,8 @@ def _register_windows_runtime() -> list[object]:
 
 _RUNTIME_DLL_HANDLES = _register_windows_runtime()
 
-# Initialize embedded R before importing the scientific Python stack.  This is
-# required by the repository's Windows DLL contract.
+# On Windows, make bundled R and its libraries discoverable when running under
+# a Conda environment. The guarded registration is a no-op on macOS and Linux.
 import rpy2.robjects as ro  # noqa: E402
 from rpy2.robjects import numpy2ri  # noqa: E402
 from rpy2.robjects.conversion import localconverter  # noqa: E402
@@ -163,8 +161,8 @@ def _random_stream_contract() -> dict[str, object]:
                 "Index offset"
             ),
             "reason": (
-                "retain the validated deterministic production search grid and its "
-                "independent receipt"
+                "retain the deterministic production search grid used by the "
+                "repeated search"
             ),
         },
     }
@@ -182,7 +180,7 @@ def _synchronize_plot_stream_metadata(paths: tuple[Path, ...]) -> None:
 # These configurations implement the user's approved reporting decision. The
 # full joint search is rerun first; these exact configurations are then refit
 # under the same likelihood so the selected and disclosed alternative models
-# share one machine-readable contract.
+# share one machine-readable specification.
 APPROVED_REPORTING_MODELS = {
     "Polarization": (
         {
@@ -1320,7 +1318,7 @@ def run_joint_ar_breakpoint_analysis(
     runs_per_mode: int = 5,
     generate_plots: bool = True,
 ) -> dict[str, pd.DataFrame]:
-    """Run the validated joint search and write the production output contract."""
+    """Run the joint search and write the production output specification."""
     if runs_per_mode < 1:
         raise ValueError("runs_per_mode must be positive")
 
@@ -1402,7 +1400,7 @@ def main() -> None:
     parser.add_argument(
         "--plots-only",
         action="store_true",
-        help="Regenerate figures and focused candidate tables from existing validated CSV outputs",
+        help="Regenerate figures and focused candidate tables from existing CSV outputs",
     )
     args = parser.parse_args()
     if args.runs_per_mode < 1:

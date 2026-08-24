@@ -69,7 +69,7 @@ def hamed_rao_sen_result(
     scale: str,
     confidence_level: float = 0.95,
 ) -> TrendResult:
-    """Run the full Hamed-Rao and Sen-slope reporting contract."""
+    """Run the full Hamed-Rao and Sen-slope reporting specification."""
 
     series = np.asarray(values, dtype=float)
     if lag < 0:

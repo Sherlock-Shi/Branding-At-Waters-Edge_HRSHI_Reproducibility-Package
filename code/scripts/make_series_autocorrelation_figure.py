@@ -15,8 +15,6 @@ which widen with lag; the PACF uses the flat plus or minus 1.96 over the square
 root of N band. Both are the conventional references reported alongside sample
 correlograms and are not exact simultaneous tests.
 
-Outputs are derivative research records. They do not alter the immutable
-Factiva-to-LLM-annotation provenance chain.
 """
 
 from __future__ import annotations
@@ -77,7 +75,7 @@ def _validate_calendar(frame: pd.DataFrame, name: str) -> None:
 
 
 def load_series(polarization_file: Path, pbi_file: Path) -> dict[str, np.ndarray]:
-    """Return the two monthly series on the validated calendar."""
+    """Return the two monthly series on the complete 34-month calendar."""
 
     polarization = pd.read_csv(polarization_file)
     polarization = polarization.loc[polarization["dimension"].eq("q1")].sort_values(

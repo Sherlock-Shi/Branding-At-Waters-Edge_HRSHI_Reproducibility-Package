@@ -174,7 +174,7 @@ def load_and_sample_data(
 
 def check_deberta_artifacts(sample_df):
     """
-    Check for potential DeBERTa artifacts in the scoring.
+    Check for potential DeBERTa artifacts in the annotation.
     """
     print("\n" + "=" * 80)
     print("CHECKING FOR POTENTIAL DEBERTA ARTIFACTS")
@@ -214,7 +214,7 @@ def check_deberta_artifacts(sample_df):
             print("  ⚠️ WARNING: Moderate correlation with sentence length detected!")
     
     # 3. Check for publisher effects
-    print("\n3. Publisher Effects on Scoring:")
+    print("\n3. Publisher Effects on Annotation:")
     if 'publisher' in sample_df.columns and 'general_dimension' in sample_df.columns:
         publisher_stats = sample_df.groupby('publisher')['general_dimension'].agg(['mean', 'count'])
         publisher_stats = publisher_stats[publisher_stats['count'] >= 5]  # Only publishers with 5+ samples
@@ -275,7 +275,7 @@ def main():
         print("  4. Are there systematic biases by publisher?")
         print("  5. Do both parties have diverse viewpoints represented?")
         print("\n⚠️ Red flags to watch for:")
-        print("  - All sentences from one party scoring similarly")
+        print("  - All sentences from one party annotated similarly")
         print("  - [ENTITY] appearing in unexpected places")
         print("  - Scores not matching sentence sentiment")
         print("  - Publisher bias driving party differences")
