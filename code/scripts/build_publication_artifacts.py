@@ -34,7 +34,7 @@ def main() -> int:
     if style_failures:
         raise RuntimeError("publication style contract failed: " + "; ".join(style_failures))
     inputs = load_publication_inputs(output_directory / "data")
-    tables_directory = output_directory / "data" / "statistics"
+    tables_directory = output_directory / "data" / "statistics" / "tables"
     figures_directory = output_directory / "manuscript" / "figures"
 
     table_outputs, blueprint_path = write_table_contract(inputs, tables_directory)

@@ -606,7 +606,7 @@ def write_table_contract(
 ) -> tuple[list[Path], Path]:
     """Write full-precision CSV tables and the formatted document blueprint."""
 
-    data_directory = output_directory / "data"
+    data_directory = output_directory
     data_directory.mkdir(parents=True, exist_ok=True)
     tables, blueprint = build_table_contract(inputs)
     outputs: list[Path] = []
@@ -614,6 +614,6 @@ def write_table_contract(
         path = data_directory / f"{stem}.csv"
         frame.to_csv(path, index=False)
         outputs.append(path)
-    blueprint_path = output_directory / "table_blueprints.json"
+    blueprint_path = output_directory.parent / "table_blueprints.json"
     blueprint_path.write_text(json.dumps(blueprint, indent=2), encoding="utf-8")
     return outputs, blueprint_path

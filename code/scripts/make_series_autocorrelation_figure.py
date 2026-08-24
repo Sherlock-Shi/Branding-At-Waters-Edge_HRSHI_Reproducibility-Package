@@ -63,6 +63,7 @@ DEFAULT_POLARIZATION_FILE = (
 DEFAULT_PBI_FILE = (
     REPO_ROOT / "data" / "statistics" / "party_brand_index_timeseries.csv"
 )
+DEFAULT_STATISTICS_DIR = REPO_ROOT / "data" / "statistics"
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "manuscript" / "figures"
 
 # Truncation lags carried into the Hamed-Rao correction, by series.
@@ -215,16 +216,22 @@ def build_figure(table: pd.DataFrame):
     return fig
 
 
-def run(polarization_file: Path, pbi_file: Path, output_dir: Path) -> pd.DataFrame:
+def run(
+    polarization_file: Path,
+    pbi_file: Path,
+    statistics_dir: Path,
+    output_dir: Path,
+) -> pd.DataFrame:
     failures = validate_style_contract()
     if failures:
         raise RuntimeError("style contract violations: " + "; ".join(failures))
 
+    statistics_dir.mkdir(parents=True, exist_ok=True)
     output_dir.mkdir(parents=True, exist_ok=True)
     series = load_series(polarization_file, pbi_file)
     table = correlogram_table(series)
 
-    table_path = output_dir / "series_autocorrelation.csv"
+    table_path = statistics_dir / "series_autocorrelation.csv"
     table.to_csv(table_path, index=False)
 
     figure = build_figure(table)
@@ -237,11 +244,18 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--polarization-file", type=Path, default=DEFAULT_POLARIZATION_FILE)
     parser.add_argument("--pbi-file", type=Path, default=DEFAULT_PBI_FILE)
+    parser.add_argument("--statistics-dir", type=Path, default=DEFAULT_STATISTICS_DIR)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     args = parser.parse_args(argv)
-    table = run(args.polarization_file.resolve(), args.pbi_file.resolve(), args.output_dir.resolve())
+    table = run(
+        args.polarization_file.resolve(),
+        args.pbi_file.resolve(),
+        args.statistics_dir.resolve(),
+        args.output_dir.resolve(),
+    )
     print(table.to_string(index=False))
-    print(f"\nWrote diagnostics to {args.output_dir.resolve()}")
+    print(f"\nWrote CSV to {args.statistics_dir.resolve()}")
+    print(f"Wrote figures to {args.output_dir.resolve()}")
     return 0
 
 

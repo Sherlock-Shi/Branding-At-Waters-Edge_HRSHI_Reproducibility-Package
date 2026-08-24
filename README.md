@@ -42,20 +42,20 @@ The pipeline consumes these Factiva export columns: `排序号`, `文档id`, `�
 - `data/statistics/breakpoint_fitted_series.csv` — 136 rows — observed values, regime means, AR fits, innovations, and standardized innovations.
 - `data/statistics/breakpoint_models.csv` — 4 rows — breakpoint model specifications, fit criteria, diagnostics, and coefficients.
 - `data/statistics/breakpoint_regimes.csv` — 12 rows — breakpoint regime dates, durations, means, and adjacent shifts.
-- `data/statistics/data/table_1_temporal_trends.csv` — 5 rows — temporal trend tests and the direct paired slope contrast.
-- `data/statistics/data/table_2_structural_models.csv` — 4 rows — selected structural models and required alternatives.
-- `data/statistics/data/table_s1a_h3_model_comparison.csv` — 2 rows — H3 error-structure model comparison.
-- `data/statistics/data/table_s1b_h3_coefficients.csv` — 12 rows — H3 coefficient estimates and intervals.
-- `data/statistics/data/table_s1c_h3_party_contrasts.csv` — 2 rows — H3 party contrasts.
-- `data/statistics/data/table_s2a_dominance_observed.csv` — 3 rows — observed dominance contributions and correlations.
-- `data/statistics/data/table_s2b_dominance_contrasts.csv` — 2 rows — dominance contrasts and intervals.
-- `data/statistics/data/table_s2c_dominance_block_sensitivity.csv` — 54 rows — dominance estimates across block lengths.
-- `data/statistics/data/table_s3a_trend_break_model_comparison.csv` — 12 rows — trend and breakpoint model comparisons.
-- `data/statistics/data/table_s3b_trend_break_coefficients.csv` — 44 rows — trend-break model coefficients and intervals.
-- `data/statistics/data/table_s3c_fitted_endpoint_contrasts.csv` — 2 rows — fitted end-to-start polarization contrasts.
-- `data/statistics/data/table_s3d_mann_kendall_s_decomposition.csv` — 3 rows — exact Mann–Kendall S decomposition.
-- `data/statistics/data/table_s4a_breakpoint_duration_sensitivity.csv` — 8 rows — breakpoint-duration sensitivity and optimizer recovery.
-- `data/statistics/data/table_s4b_breakpoint_regimes.csv` — 12 rows — reported breakpoint regimes, means, and shifts.
+- `data/statistics/tables/table_1_temporal_trends.csv` — 5 rows — temporal trend tests and the direct paired slope contrast.
+- `data/statistics/tables/table_2_structural_models.csv` — 4 rows — selected structural models and required alternatives.
+- `data/statistics/tables/table_s1a_h3_model_comparison.csv` — 2 rows — H3 error-structure model comparison.
+- `data/statistics/tables/table_s1b_h3_coefficients.csv` — 12 rows — H3 coefficient estimates and intervals.
+- `data/statistics/tables/table_s1c_h3_party_contrasts.csv` — 2 rows — H3 party contrasts.
+- `data/statistics/tables/table_s2a_dominance_observed.csv` — 3 rows — observed dominance contributions and correlations.
+- `data/statistics/tables/table_s2b_dominance_contrasts.csv` — 2 rows — dominance contrasts and intervals.
+- `data/statistics/tables/table_s2c_dominance_block_sensitivity.csv` — 54 rows — dominance estimates across block lengths.
+- `data/statistics/tables/table_s3a_trend_break_model_comparison.csv` — 12 rows — trend and breakpoint model comparisons.
+- `data/statistics/tables/table_s3b_trend_break_coefficients.csv` — 44 rows — trend-break model coefficients and intervals.
+- `data/statistics/tables/table_s3c_fitted_endpoint_contrasts.csv` — 2 rows — fitted end-to-start polarization contrasts.
+- `data/statistics/tables/table_s3d_mann_kendall_s_decomposition.csv` — 3 rows — exact Mann–Kendall S decomposition.
+- `data/statistics/tables/table_s4a_breakpoint_duration_sensitivity.csv` — 8 rows — breakpoint-duration sensitivity and optimizer recovery.
+- `data/statistics/tables/table_s4b_breakpoint_regimes.csv` — 12 rows — reported breakpoint regimes, means, and shifts.
 - `data/statistics/dominance_analysis_metadata.json` — N/A rows; 24 top-level fields — dominance-analysis parameters, counts, and diagnostics.
 - `data/statistics/dominance_block_sensitivity.csv` — 54 rows — block-length sensitivity estimates and intervals.
 - `data/statistics/dominance_bootstrap_replicates.csv` — 10,000 rows — dominance bootstrap contributions, contrasts, and correlations.
@@ -98,8 +98,11 @@ The pipeline consumes these Factiva export columns: `排序号`, `文档id`, `�
 - `data/statistics/party_slope_contrast.csv` — 1 row — paired party-slope contrast and marginal Sen slopes.
 - `data/statistics/party_slope_contrast_metadata.json` — N/A rows; 9 top-level fields — party-slope contrast parameters, counts, and diagnostics.
 - `data/statistics/q1_stance_mmk_trend.png` — N/A rows; 4,233 × 2,295 pixels — Q1 stance trend.
+- `data/statistics/series_autocorrelation.csv` — 12 rows — autocorrelation and partial-autocorrelation diagnostics for polarization and the Party Brand Index.
 - `data/statistics/statistical_tests_report.txt` — 7 lines — statistical-test report.
 - `data/statistics/table_blueprints.json` — N/A rows; 4 top-level fields — document-builder table specifications.
+- `data/statistics/temporal_diagnostics/party_brand_index_measurement_and_breakpoint.png` — N/A rows; 2,304 × 1,473 pixels — Party Brand Index measurement and breakpoint diagnostic.
+- `data/statistics/temporal_diagnostics/q1_polarization_measurement_and_breakpoint.png` — N/A rows; 2,304 × 1,473 pixels — Q1 polarization measurement and breakpoint diagnostic.
 - `data/statistics/trend_break_analysis_metadata.json` — N/A rows; 19 top-level fields — trend-break analysis parameters, counts, and diagnostics.
 - `data/statistics/trend_break_coefficients.csv` — 44 rows — trend-break model coefficients and conditional intervals.
 - `data/statistics/trend_break_comparison/trend_break_search_runs.csv` — 40 rows — trend-break search runs and fit values.
