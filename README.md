@@ -1,4 +1,4 @@
-# Paper 3: Ukraine Aid Reproduction Package
+# Branding At The Water's Edge Repo
 
 Analysis pipeline and derived data for a study of how United States news coverage represented Democratic and Republican positions on Ukraine aid between March 2022 and December 2024.
 
