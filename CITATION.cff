@@ -1,9 +1,12 @@
-cff-version: 1.1.0
+cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
+type: software
+title: "Sherlock-Shi/Branding-At-Waters-Edge_HRSHI_Reproducibility-Package: Full Package Zip"
 authors:
-- family-names: Shi
-  given-names: Haoran
-orcid: https://orcid.org/0000-0002-4973-0931
-title:Sherlock-Shi/Branding-At-Waters-Edge_HRSHI_Reproducibility-Package: Full Package Zip
+  - family-names: Shi
+    given-names: Haoran
+    orcid: "https://orcid.org/0000-0002-4973-0931"
 version: academic
 date-released: 2026-08-24
+doi: 10.5281/zenodo.22087586
+license: CC-BY-4.0

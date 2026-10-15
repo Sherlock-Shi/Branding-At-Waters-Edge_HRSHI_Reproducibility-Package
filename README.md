@@ -324,8 +324,16 @@ Python package versions are pinned in `requirements.txt`.
 
 ## Citation
 
+Paper (preprint):
+
 ```text
-[Zenodo DOI to be added on deposit]
+Shi, H., Wang, W., & Krpan, D. (2026). Branding at the Water's Edge: Perceived Elite Polarization of Ukraine Aid, 2022–2024. SocArXiv. https://doi.org/10.31235/osf.io/c8ygf_v2
+```
+
+Reproducibility package:
+
+```text
+Shi, H. (2026). Sherlock-Shi/Branding-At-Waters-Edge_HRSHI_Reproducibility-Package: Full Package Zip (Version academic) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.22087586
 ```
 
 ---
